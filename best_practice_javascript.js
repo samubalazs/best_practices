@@ -19,6 +19,7 @@ const times = (a, b) => a * b;
 const find_difference = (a, b) =>
   Math.abs(a.reduce(times) - b.reduce(times));
  
+
 //get name's monogram
 const abbrevName = name => name.split(' ').map(x => x.substr(0, 1).toUpperCase()).join('.');
 
@@ -760,20 +761,6 @@ function fib(n) {
 const f = n => n > 0 && n%1 == 0 ? (n * (n+1)) / 2 : false;  //OR parseInt(n) OR Number.isInteger(n)
 
 
-//number-like counter
-function Counter(){
-  this.number = 0;
-};
-
-Counter.prototype.incr = function() {
-  this.number++;
-};
-
-Counter.prototype.valueOf = function () {
-  return this.number;
-};
-
-
 //recursive reverse string
 function reverse(str) {
   return str.length > 1 ? reverse(str.slice(1)) + str[0] : str;
@@ -923,7 +910,7 @@ function mygcd(x,y){
 }
 
 
-//got a function body as string, create fn with argument the return the result
+//got a function body as string, create fn with argument then return the result
 function runYourString (arg, obj) {
   var fn = new Function (obj.param, obj.func);
   return fn(arg);
