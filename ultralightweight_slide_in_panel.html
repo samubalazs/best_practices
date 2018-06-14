@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slide in panel</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js">
+    </script>
+    <style>
+
+      #root {
+        position: fixed;
+        top: 150px;
+        width: 420px;
+        height: 420px;
+        padding: 10px;
+        box-shadow: 0 0 1px 0 #4d4d4d, 0 0 0 8px #6b6b6b;
+        border-radius: 3px;        
+        z-index: 10;
+        background-color: #f9f9f9;
+        color: #000000;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+      }
+
+      .right {
+        right: -439px;
+      }
+
+      .show {
+        right: 0;
+      }
+
+      #showmenu {
+        position: absolute;
+        display: inline-block;
+        top: 40px;
+        left: -57px;
+        padding: 8px 10px;
+        box-shadow: 0px 0px 3px 0px #4d4d4d;
+        font-size: 1.3em;        
+        cursor: pointer;
+        transform: rotate(90deg);
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+      }
+
+      .active {
+        background-color: #ffb80f;
+        color: #6b6b6b;
+      }
+
+      #showmenu:not(.active) {
+        background-color: #6b6b6b;
+        color: #FFFFFF;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" class="right">
+      <div id="showmenu">Filters</div>
+      x
+    </div>
+    <script>
+
+      $("#showmenu").click(function(e) {
+        e.preventDefault();
+        $("#root").toggleClass("show");
+        $("#showmenu").toggleClass("active");
+      });
+
+    </script>
+  </body>
+</html>
