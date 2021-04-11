@@ -1,0 +1,155 @@
+Basics
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+
+-------------------------------------------------------
+
+Memory Management
+JavaScript automatically allocates memory when objects are created and frees it when they are not used anymore (garbage collection).
+This automaticity is a potential source of confusion: it can give developers the false impression that they don't need to worry about memory management.
+
+Memory life cycle
+- Allocate the memory you need (automatically allocate memory when values are initially declared)
+- Use the allocated memory (read, write)
+- Release the allocated memory when it is not needed anymore
+
+JavaScript, utilize a form of automatic memory management known as garbage collection (GC). The purpose of a garbage collector
+is to monitor memory allocation and determine when a block of allocated memory is no longer needed and reclaim it. 
+
+References (reference counting garbage collection)
+The main concept that garbage collection algorithms rely on is the concept of reference. Within the context of memory management,
+an object is said to reference another object if the former has access to the latter (either implicitly or explicitly).
+An object is said to be "garbage", or collectible if there are zero references pointing to it. Caution (Circular references)
+
+Mark-and-sweep algorithm
+This algorithm reduces the definition of "an object is no longer needed" to "an object is unreachable".
+In JavaScript, the root is the global object. Periodically, the garbage collector will start from these roots, find all objects
+that are referenced from these roots, then all objects referenced from these, etc. Starting from the roots, the garbage collector
+will thus find all reachable objects and collect all non-reachable objects.
+
+What are memory leaks?
+https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/
+
+
+---------------------------------------------------------
+
+Concurrency model and the event loop
+JavaScript has a concurrency model based on an event loop, which is responsible for executing the code, collecting and processing events,
+and executing queued sub-tasks.
+The call stack is a mechanism so the interpreter knows its place in a script. When a script calls a function, the interpreter adds
+it on the top of the call stack. When the current function is finished, the interpreter takes it off the stack (Last In, First Out).
+The event loop has one simple job: it looks at the call stack and the task queue, and if the stack is empty, it takes the first item
+in the queue and sends it back to the call stack.
+
+Javascrpit is that it is -
+single-threaded which means 2 statements cannot be executed simultaneously,
+non-blocking which means execution of some code should not stop the execution of program because its too slow making the browser unresponsive,
+asynchronous which means that 2 or more tasks can be done simultaneously,
+concurrent means multiple computations can happen at same time.
+
+Heap: This is where memory allocation for all your variables take place.
+
+Stack: This is where all the javascript code is pushed and gets executed line by line and is popped out after its execution.
+Javascript maintain the order of execution contexts using this stack only. It is also known as program stack or execution context stack.
+A call stack is a simple data structure that records where in the code we are currently. So if we step into a function that is a
+function invocation it is pushed to the call stack. When we return from a function it is popped out of the stack.
+
+Callback Queue: This is the place where all the asynchronous code goes. The callback functions from setTimeout, setInterval, HTML
+events and ajax requests are pushed into this queue when they are ready for execution.
+
+Event Loop: The main function of event loop is to check the program stack and find if it is empty. If the stack is empty, then it
+checks the callback queue. If the callback queue is not empty then it pushes the code block from callback queue to main stack and
+executes it sequentially.
+
+Example code:
+    console.log("Hello");
+    setTimeout( () => {
+        console.log("Hello inside setTimeout");
+    }, 1000);
+    console.log("Bye");
+
+The program execution starts. Since Javascript is single threaded only 1 line can be executed at a time.
+So, First line of code is pushed onto stack.
+The console.log is executed printing "Hello". So this line is now popped out of stack.
+Now next line to be executed is setTimeout and it gets pushed onto stack. Now the javascript runtime can only execute single statement
+	but the browser comes with a whole lot of other things which are web apis. This is when concurrency comes into picture. Now on the execution of setTimeout, a call to setTimeout api is made and the setTimeout is now popped of from stack.
+The third statement is pushed onto stack and then executed. This prints "Bye" as output.
+Now when the setTimeout api ( and all other apis ) are completed, the callback is pushed into callback queue simultaneously.
+	These apis cannot interact directly with the stack.
+Now is the time when event loop comes into picture. Event loops jobs is to monitor call stack and task queue.
+	If the call stack is empty, it has to take the first thing from the callback queue and push it onto the stack.
+	So now callback from the timeout is pushed onto the stack which then gets executed and prints "Hello inside setTimeout".
+	
+
+---------------------------------------------------
+
+TDD
+Test-driven development refers to a style of programming in which three activities are tightly interwoven:
+coding, testing (in the form of writing unit tests) and design (in the form of refactoring).
+
+rules:
+write a single unit test describing an aspect of the program (red)
+run the test, which should fail because the program lacks that feature
+write just enough code, the simplest possible, to make the test pass (green)
+refactor the code until it conforms to the simplicity criteria
+repeat, accumulating unit tests over time
+
+Benefits
+- Eliminates fear of change. If a code change introduces a bug, developers are alerted to it quickly, and TDD's tight feedback loop
+	will quickly notify them when it's fixed.
+- A safety net which makes continuous deployment safer. Test failures halt the deployment process, allowing you to fix bugs before
+	customers ever have the chance to see them.
+- 40% — 80% fewer bugs.
+- Better code coverage than writing tests after the fact. Because we create code to make a specific test pass, code coverage will be close to 100%.
+- Faster developer feedback loop. Without TDD, developers must manually test each change to ensure that it works. With TDD, unit tests can run
+	on-change automatically, providing faster feedback during development and debugging sessions.
+- Interface design aid: Developers often think about the software implementation before thinking about the developer experience
+	of using the software component. TDD flips this around, forcing developers to design the API before working on the implementation.
+- KISS and YAGNI — Keep it Simple, Stupid, and You Ain't Gonna Need It are two overlapping software design principles.
+	KISS means just like what it sounds like it means. Keep things simple. YAGNI means don't build features and abstractions
+	unless those features serve a specific existing requirement (not a future requirement). TDD helps with that process by forcing
+	you to work in small iterations, tackling one requirement at a time on an as-needed basis.
+
+TDD Costs
+Users without TDD experience may find they move 15% — 30% slower, but with 1–2 year's practice,
+TDD's realtime feedback process canenhance productivity.
+
+100% coverage is good, but you should achieve it with a combination of unit, integration, and functional tests.
+Use the right kind of test for the job at hand.
+
+The pillars of good tests
+Trustworthiness - Developers will want to run trustworthy tests, and they’ll accept the test results with confidence. 
+	Trustworthy tests don’t have bugs, and they test the right things.
+
+Maintainability - Nonmaintainable tests are nightmares because they can ruin project schedules, or you risk losing the
+	tests when the project is put on a more aggressive schedule. Developers will simply stop maintaining and fixing
+	tests that take too long to change.
+
+Readability - This means not just being able to read a test but also figuring out the problem if the test seems to be wrong.
+Without readability, the other two pillars fall pretty quickly. Maintaining tests becomes harder, and you can’t trust them anymore.
+
+
+Unit tests
+Tests very specific, low-level pieces of functionality
+A unit test is a piece of a code (usually a method) that invokes another piece of code and checks the correctness
+of some assumptions afterward. If the assumptions turn out to be wrong, the unit test has failed. A “unit” is a method or function.
+Unit test should:
+be quick to run / be independent from other tests / have the minimum number of assertions / avoid pre-conditions as much as possible
+check the results of the function, not the inner workings / uses clear descriptions to define what the test is doing
+
+
+Integration test
+Ensure that the individual pieces of your application work together correctly
+Integration Testing looks to see if each of these unit tests work together to properly perform a component of the application.
+Libraries for integration testing: Mocha, Chai, Sinon (for mocks, stubs and test doubles)
+
+End-to-End test
+Ensure your entire application works as seen from the viewpoint of a user (cypress.io)
+
+
+Unit Test vs. Integration Test
+The purpose of a unit test in software engineering is to verify the behavior of a relatively small piece of software,
+independently from other parts. Unit tests are narrow in scope, and allow us to cover all cases, ensuring that every single part works correctly.
+
+On the other hand, integration tests demonstrate that different parts of a system work together in the real-life environment.
+They validate complex scenarios (we can think of integration tests as a user performing some high-level operation within our system),
+and usually require external resources, like databases or web servers, to be present.
