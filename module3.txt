@@ -1,0 +1,456 @@
+Responsive Design vs. Adaptive Design
+Responsive is fluid and adapts to the size of the screen no matter what the target device.
+Responsive uses CSS media queries to change styles based on the target device such as display type, width, height, etc.,
+and only one of these is necessary for the site to adapt to different screens.
+Responsive designs respond to changes in browser width by adjusting the placement of design elements to fit in the available space.
+A responsive website shows content based on the available browser space.
+Responsive design is easier and takes less work to implement and this is the preferred method for creating new sites at this moment.
+keep an eye on visual hierarchy (https://www.interaction-design.org/literature/topics/visual-hierarchy)
+Sites that use responsive design (i.e., ones with a URL that serve all devices) are currently more search engine friendly.
+Download times vary between desktop and mobile devices. The flexibility of images is a big consideration here.
+Responsive Design lets designers show content based on the browser space available.
+This allows consistency between what a site shows on a desktop and what it shows on a handheld device. Responsive design is the “traditional” option and remains the more popular approach to date.
+Responsive web design (RWD) is recommended and rewarded by Google.
+
+Pros
+Uniform & seamless = good UX.
+Abundance of templates to use.
+SEO friendly.
+Often easier to implement
+
+Cons
+Less screen size design control.
+Elements can move around
+Advertisements lost on screen.
+Longer mobile download times.
+
+
+Adaptive design, on the other hand, uses static layouts based on breakpoints that don't respond once they're initially loaded.
+Adaptive works to detect the screen size and load the appropriate layout for it – 
+generally you would design an adaptive site for six common screen widths:
+320 - 480 - 760 - 960 - 1200 - 1600
+It is also known as progressive enhancement of a website.
+Where responsive design relies on changing the design pattern to fit the real estate available to it,
+adaptive design has multiple fixed layout sizes. When the site detects the available space, it selects the layout most appropriate for the screen.
+So, when you open a browser on the desktop, the site chooses the best layout for that desktop screen;
+resizing the browser has no impact on the design.
+ensure the best user experience according to whichever device the user is using to interface
+adapt to the user's situational needs and capabilities.
+begin at the lowest resolution version of the site and work our way up to the highest. Six designs are the current standard,
+but depending on your users' data, you might be able to use fewer designs.
+offer a link to let the user toggle between versions.
+adaptive designs are used to retrofit existing sites to allow them to be used on multiple devices.
+adaptive design might keep you back on SEO (sorting .com and m.com sites)
+
+Adaptive Design, developed in 2011, is more involved in that the designer has several fixed layout sizes. It offers an alternative to the “one-size-stretches-to-all” approach.
+
+Pros
+Allows designers to build the best UX for the appropriate device.
+Mobile devices can sense their user's environment.
+Designers can optimize advertisements based on user data from smart devices.
+
+Cons
+Labor-intensive to create – most adaptive designs are retrofitting traditional sites to make them more accessible.
+Tablets and netbooks can have trouble with site configuration tending to be smartphone- or desktop-oriented.
+Challenging to SEO — Search engines have trouble appreciating identical content on multiple sites.
+
+
+With responsive, you will be designing with all layouts in mind and this, of course, can confuse the process and make it quite complex.
+This means that you should focus on creating a viewport for mid-resolution and you can then use media queries to adjust for low and high resolutions later on.
+So in essence, it's usually better to use responsive for new projects, and adaptive for retrofits.
+
+With all of that in mind, it's safe to say that responsive is usually the preferred technique
+if only because of the ongoing work that adaptive design demands.
+However, if a client or company has the budget, then adaptive might be a better choice because of loading time.
+
+Standalone Mobile Design
+There is also the option to create a mobile-only website (these are usually denoted in the URL bar of a browser using the “m.” prefix).
+The big drawback of creating a separate site is that it requires an awful lot more maintenance in order to keep the two versions of a website
+
+Challenges
+Image resizing
+Third party content / wrap it into iframe
+
+RESS
+where to place logic
+feature detection (client side) / eg. is touch supported?
+
+device detection
+analyze HTTP header and lookup in db to find capabilities
+which markup should send / can be decided on server side
+need licence and manual imput for testing
+First load: Detect device - send caps for JS/get markup based on caps - detect features and store in cookie
+Second load: combine cookies and device detection
+
+Scalable images
+do not load more then you are going to show
+do not scale in images in CSS
+do not load "important" images with JS
+Solution
+set a cookie with client's width/height and load image from ImageServer that scales accordingly
+send server side detection - size
+store grid widths in cookie
+
+Srcset Display Density (1x, 2x) / Width Descriptors
+
+Device pixel ratio is the the ratio between the physical pixels on a the hardware screen and the logical pixels
+(related to the physical size of the screen, also known as CSS resolution).
+
+responsive images
+https://web.dev/optimize-cls/
+http://responsiveimages.org/
+
+
+------------------------------------------------
+
+LocalStorage vs sessionStorage
+the data survives a page refresh (for sessionStorage) and even a full browser restart (for localStorage).
+
+- The data is saved locally only and can't be read by the server, which eliminates the security issue that cookies present.
+- It allows for much more data to be saved (10Mb for most browsers).
+- The storage is bound to the origin (domain/protocol/port triplet). That is, different protocols or sub-domains
+	infer different storage objects, they can't access data from each other.
+
+Both the storage objects provide same methods and properties:
+	setItem(key, value) – store item as key/value pair.
+	getItem(key) – get item's value by key.
+	removeItem(key) – remove item using key.
+	clear() – clear or delete everything.
+	key(index) – get the Item key based on index.
+	length – returns total number of stored items.
+	
+localStorage
+Main features:
+	Data is shared between all tabs and windows from the same origin.
+	The data will not expire. It will remain even after browser restart and survive OS reboot too.
+	
+sessionStorage
+it's functionality is much more limited:
+	The sessionStorage exists only within the current browser tab. Another tab with the same page will have a different session storage.
+	However it is shared between iframes in the same tab (assuming they come from the same origin).
+	The data survives page refresh, but not closing/opening the tab.
+	
+Storage Event
+Storage event triggers(with properties), whenever there is any updates in the data in localStorage or sessionStorage.
+key / oldValue / newValue / URL / storageArea (where the update happened
+The important thing to note is: the event triggers on all -window- objects where the storage is accessible, except the one that caused it.
+
+Web storage objects localStorage and sessionStorage allows us to store key/value in the browser.
+	Both key and value must be strings.
+	The limit is 2mb+, it depends on the browser.
+	They do not expire.
+	The data is bound to the origin (domain/port/protocol).
+	
+	
+-------------------------------------------------------------
+
+HTTP cookies
+An HTTP cookie (web cookie, browser cookie) is a small piece of data that a server sends to the user's web browser.
+The browser may store it and send it back with later requests to the same server. Typically, it's used to tell if two
+requests came from the same browser — keeping a user logged-in, for example.
+
+Cookies are mainly used for three purposes:
+- Session management
+	Logins, shopping carts, game scores, or anything else the server should remember
+- Personalization
+	User preferences, themes, and other settings
+- Tracking
+	Recording and analyzing user behavior
+	
+Creating cookies
+After receiving an HTTP request, a server can send one or more Set-Cookie headers with the response.
+The cookie is usually stored by the browser, and then the cookie is sent with requests made to the same server inside a Cookie HTTP header.
+
+The Set-Cookie HTTP response header sends cookies from the server to the user agent. Eg.: Set-Cookie: <cookie-name>=<cookie-value>
+
+The lifetime of a cookie can be defined in two ways:
+	- Session cookies are deleted when the current session ends. The browser defines when the "current session" ends,
+		and some browsers use session restoring when restarting, which can cause session cookies to last indefinitely long.
+	- Permanent cookies are deleted at a date specified by the Expires attribute, or after a period of time specified by the Max-Age attribute.
+
+The Domain and Path attributes define the scope of the cookie: what URLs the cookies should be sent to.
+
+Domain attribute
+The Domain attribute specifies which hosts are allowed to receive the cookie. If unspecified, it defaults to the same host that set the cookie,
+excluding subdomains. If Domain is specified, then subdomains are always included. Therefore, specifying Domain is less restrictive than omitting it.
+However, it can be helpful when subdomains need to share information about a user.
+For example, if Domain=mozilla.org is set, then cookies are available on subdomains like developer.mozilla.org.
+
+Path attribute
+The Path attribute indicates a URL path that must exist in the requested URL in order to send the Cookie header.
+The %x2F ("/") character is considered a directory separator, and subdirectories match as well.
+
+SameSite attribute
+The SameSite attribute lets servers specify whether/when cookies are sent with cross-origin requests (where Site is defined by
+the registrable domain), which provides some protection against cross-site request forgery attacks (CSRF).
+
+It takes three possible values: Strict, Lax, and None.
+	- With Strict, the cookie is sent only to the same site as the one that originated it;
+	- Lax is similar, except that cookies are sent when the user navigates to the cookie's origin site,
+	eg by following a link from an external site;
+	- None specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts
+	(i.e. if SameSite=None then the Secure attribute must also be set). If no SameSite attribute is set then the cookie is treated as Lax.
+	
+A cookie with the Secure attribute is sent to the server only with an encrypted request over the HTTPS protocol.
+it can be read and modified by someone with access to the client's hard disk (or JavaScript if the HttpOnly attribute is not set)
+
+A cookie with the HttpOnly attribute is inaccessible to the JavaScript Document.cookie API; it is sent only to the server.
+This precaution helps mitigate cross-site scripting (XSS) attacks.
+
+Cookie prefixes
+__Host-
+	If a cookie name has this prefix, it is accepted in a Set-Cookie header only if it is also marked with the Secure attribute,
+	was sent from a secure origin, does not include a Domain attribute, and has the Path attribute set to /. In this way,
+	these cookies can be seen as "domain-locked".
+
+__Secure-
+	If a cookie name has this prefix, it is accepted in a Set-Cookie header only if it is marked with the Secure attribute and
+	was sent from a secure origin. This is weaker than the __Host- prefix.
+	
+Cookie-related regulations
+Legislation or regulations that cover the use of cookies include:
+	- The General Data Privacy Regulation (GDPR) in the European Union
+	- The ePrivacy Directive in the EU
+	- The California Consumer Privacy Act
+
+These regulations have global reach, because they apply to any site on the World Wide Web that is accessed by users from
+these jurisdictions (the EU and California, with the caveat that California's law applies only to entities with gross revenue over 25 million USD,
+among other things.)
+
+These regulations include requirements such as:
+	- Notifying users that your site uses cookies.
+	- Allowing users to opt out of receiving some or all cookies.
+	- Allowing users to use the bulk of your service without receiving cookies.
+	
+Man-in-the-middle attacks
+https://www.youtube.com/watch?v=8OR2dDIaIDw
+A man-in-the-middle (MitM) attack describes a broad category of attacks where an attacker sits between a client and a server and
+intercepts the data going between the two.
+As a developer, you can greatly reduce the chance of a MitM attack by ensuring that you enable HTTPS on your server,
+use an SSL certificate from a trusted certificate authority, and ensure your code uses HTTPS instead of the insecure HTTP.
+In terms of cookies, you should add the Secure attribute to your cookies so they can only be sent over a secure HTTPS connection
+
+XSS attacks
+https://www.youtube.com/watch?v=EoaDgUgS6QA
+An XSS (cross-site scripting) attack describes a category of attacks when a bad actor injects unintended, potentially dangerous code into a website.
+These attacks are very problematic because they could affect every person that visits the site.
+In terms of cookies, if a bad actor pulls off a successful XSS attack on a site, they could gain access to session cookies and
+access the site as another signed in user.
+As a developer, you'll want to ensure that your server enforces the Same Origin Policy, and that any
+input you receive from people is properly sanitized.
+
+
+------------------------------------------------------------------
+
+Web Workers
+Web Workers are a simple means for web content to run scripts in background threads. The worker thread can perform tasks
+without interfering with the user interface. In addition, they can perform I/O using XMLHttpRequest (although the responseXML and
+channel attributes are always null) or fetch (with no such restrictions). Once created, a worker can send messages to the
+JavaScript code that created it by posting messages to an event handler specified by that code (and vice versa).
+
+Web Workers API
+Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application.
+The advantage of this is that laborious processing can be performed in a separate thread, allowing the main (usually the UI) thread
+to run without being blocked/slowed down.
+
+Worker types
+- Dedicated workers are workers that are utilized by a single script. This context is represented by either a DedicatedWorkerGlobalScope object.
+
+- Shared workers are workers that can be utilized by multiple scripts running in different windows, IFrames, etc.,
+	as long as they are in the same domain as the worker. They are a little more complex than dedicated workers — scripts must communicate via an active port.
+
+- Service Workers essentially act as proxy servers that sit between web applications, the browser, and the network (when available).
+	They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take
+	appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to
+	push notifications and background sync APIs.
+
+- Chrome Workers are a Firefox-only type of worker that you can use if you are developing add-ons and want to use workers in extensions and
+	have access to js-ctypes in your worker. See ChromeWorker for more details.
+	
+Supported Web APIs
+Barcode Detection API, CustomEvent, Fetch API, FileReader, Network Information API, Performance API, Promise,
+URL API (e.g. URL), WebGL with OffscreenCanvas,  WebSocket, XMLHttpRequest.
+
+
+-------------------------------------------------------------
+
+Offline web applications
+Users of typical online Web applications are only able to use the applications while they have a connection to the Internet.
+The HTML 5 specification provides two solutions to this: a SQL-based database API for storing data locally,
+and an offline application HTTP cache for ensuring applications are available even when the user is not connected to their network.
+
+SQL
+The client-side SQL database in HTML 5 enables structured data storage.
+The API to interact with this database is asynchronous which ensures that the user interface doesn't lock up.
+
+Offline Application Caching APIs
+The attribute takes a URI to a manifest, which specifies which files are to be cached. provides a way for scripts to add and remove
+entries from the cache dynamically, and a way for applications to atomically update their cache to new files, optionally presenting
+custom UI during the update.
+
+-----------------------------------------------------------------
+
+ Geolocation API
+ allows the user to provide their location to web applications if they so desire. For privacy reasons,
+ the user is asked for permission to report location information.
+ 
+----------------------------------------------------------------
+ 
+INPUT TYPES
+<input type="search"> for search boxes
+<input type="number"> for spinboxes
+<input type="range"> for sliders
+<input type="color"> for color pickers
+<input type="tel"> for telephone numbers
+<input type="url"> for web addresses
+<input type="email"> for email addresses
+<input type="date"> for calendar date pickers
+<input type="month"> for months
+<input type="week"> for weeks
+<input type="time"> for timestamps
+<input type="datetime"> for precise, absolute date+time stamps
+<input type="datetime-local"> for local dates and times
+
+------------------------------------------------------------------
+
+Placeholder text / Form autofocus / Microdata (machine-readable labels - groups of name-value pairs known as items) /
+History API (standardized way to manipulate the browser history via script)
+
+------------------------------------------------------------------
+
+NEW SEMANTIC ELEMENTS IN HTML5
+
+<section>
+	The section element represents a generic document or application section. A section, in this context, is a thematic grouping of content,
+	typically with a heading. Examples of sections would be chapters, the tabbed pages in a tabbed dialog box, or the numbered sections
+	of a thesis. A Web site's home page could be split into sections for an introduction, news items, contact information.
+
+<nav>
+	The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
+	Not all groups of links on a page need to be in a nav element — only sections that consist of major navigation blocks are appropriate
+	for the nav element. In particular, it is common for footers to have a short list of links to common pages of a site, such as the terms of service, the home page, and a copyright page. The footer element alone is sufficient for such cases, without a nav element.
+
+<article>
+	The article element represents a component of a page that consists of a self-contained composition in a document, page, application,
+	or site and that is intended to be independently distributable or reusable, e.g. in syndication. This could be a forum post,
+	a magazine or newspaper article, a Web log entry, a user-submitted comment, an interactive widget or gadget, or any other
+	independent item of content.
+
+<aside>
+	The aside element represents a section of a page that consists of content that is tangentially related to the content around
+	the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars
+	in printed typography. The element can be used for typographical effects like pull quotes or sidebars, for advertising,
+	for groups of nav elements, and for other content that is considered separate from the main content of the page.
+
+<hgroup>
+	The hgroup element represents the heading of a section. The element is used to group a set of h1–h6 elements when the heading
+	has multiple levels, such as subheadings, alternative titles, or taglines.
+
+<header>
+	The header element represents a group of introductory or navigational aids. A header element is intended to usually contain
+	the section’s heading (an h1–h6 element or an hgroup element), but this is not required. The header element can also be used to wrap a section’s table of contents, a search form, or any relevant logos.
+
+<footer>
+	The footer element represents a footer for its nearest ancestor sectioning content or sectioning root element. A footer typically
+	contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
+	Footers don’t necessarily have to appear at the end of a section, though they usually do. When the footer element contains
+	entire sections, they represent appendices, indexes, long colophons, verbose license agreements, and other such content.
+
+<time>
+	The time element represents either a time on a 24 hour clock, or a precise date in the proleptic Gregorian calendar,
+	optionally with a time and a time-zone offset.
+
+<mark>
+	The mark element represents a run of text in one document marked or highlighted for reference purposes.
+	
+	
+All browsers render unknown elements inline, i.e. as if they had a display:inline CSS rule.
+
+------------------------------------------------------
+
+Canvas
+HTML 5 defines the <canvas> element as "a resolution-dependent bitmap canvas which can be used for rendering graphs, game graphics,
+or other visual images on the fly." A canvas is a rectangle in your page where you can use JavaScript to draw anything you want.
+
+
+-------------------------------------------------------
+
+PWA
+Progressive Web Apps (PWA) are built and enhanced with modern APIs to deliver enhanced capabilities, reliability, and installability
+while reaching anyone, anywhere, on any device with a single codebase.
+Progressive Web Apps are web apps that use emerging web browser APIs and features along with traditional progressive enhancement
+strategy to bring a native app-like user experience to cross-platform web applications.
+
+The three app pillars
+- Capable
+	The web is quite capable in its own right today. You can build a hyper-local video chat app using WebRTC, geolocation, and push notifications.
+	You can make that app installable and take those conversations virtual with WebGL and WebVR. New and upcoming APIs are looking to change that,
+	expanding what the web can do with features like file system access, media controls, app badging, and full clipboard support.
+	
+- Reliable
+	A reliable Progressive Web App feels fast and dependable regardless of the network. Finally, reliable applications need to be usable regardless
+	of network connection. When a request isn't possible, they expect to be told there's trouble instead of silently failing or crashing.
+	
+- Installable (offer add to home screen)
+	Installed Progressive Web Apps run in a standalone window instead of a browser tab. They're launchable from on the user's home screen,
+	dock, taskbar, or shelf. It's possible to search for them on a device and jump between them with the app switcher, making them feel
+	like part of the device they're installed on. Progressive Web Apps can register to accept content from other applications, or to be
+	the default application to handle different types of files.
+	
+In order to call a Web App a PWA, technically speaking it should have the following features: Secure contexts (HTTPS),
+one or more Service Workers, and a manifest file.
+- Secure contexts (HTTPS)
+	The web application must be served over a secure network. Being a secure site is not only a best practice, but it also establishes
+	your web application as a trusted site especially if users need to make secure transactions. Most of the features related to a PWA
+	such as geolocation and even service workers are available only once the app has been loaded using HTTPS.
+
+- Service workers
+	A service worker is a script that allows intercepting and control of how a web browser handles its network requests and asset caching.
+	With service workers, web developers can create reliably fast web pages and offline experiences.
+
+- Manifest file
+	A JSON file that controls how your app appears to the user and ensures that progressive web apps are discoverable.
+	It describes the name of the app, the start URL, icons, and all of the other details necessary to transform the website into an app-like format.
+	
+What makes a good Progressive Web App?
+- Starts fast, stays fast
+- Works in any browser
+- Responsive to any screen size
+- Provides a custom offline page
+- Is installable
+
+Good to have
+- Provides an offline experience
+- Is fully accessible
+- Can be discovered through search
+- Works with any input type (usable with a mouse, a keyboard, a stylus, or touch)
+- Provides context for permission requests
+- Follows best practices for healthy code
+
+Offline fallback page
+Thanks to service workers and the Cache Storage API, you can provide a customized offline experience for your users.
+This can be a simple branded page with the information that the user is currently offline, but it can just as well be a more creative solution.
+
+Periodic background sync lets you show fresh content when a progressive web app or service worker-backed page is launched.
+It does this by downloading data in the background when the app or page is not being used. This prevents the app's content
+from refreshing after launch while it's being viewed. Better yet, it prevents the app from showing a content spinner before refreshing.
+
+Handle updates
+When the PWA is launched, or opened in a browser tab, Chrome determines the last time the local manifest was checked for changes.
+If the manifest hasn't been checked since the browser last started, or it hasn't been checked in the last 24 hours,
+Chrome will make a network request for the manifest, then compare it against the local copy.
+
+Offline UX design
+Decide what to show your users when they have a bad network connection
+A successful connection is your app's normal online experience. The failure of a connection, however, can be both the offline state
+of your app as well how the app behaves when there is a laggy network.
+
+When thinking about the success or failure of a network connection you need to ask yourself these important UX questions:
+
+How long do you wait to determine the success or failure of a connection?
+What can you do while success or failure is being determined?
+What should you do in the event of failure?
+How do you inform the user of the above?
+
+Inform the user of both the actions they can still take when they have a network failure and the current state of the application.
+Provide an offline experience by default
