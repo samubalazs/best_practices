@@ -1,0 +1,1132 @@
+Waterfall / Manufacturing Approach
+- Well-definde checklist, processes, tools
+- Phase 1 to Phase 2 to ... Phase N
+- Fixed scope
+- Comprehensive system documentation
+
+The Waterfall methodology—also known as the Waterfall Model—is a sequential software development process,
+where progress flows steadily toward the conclusion (like a waterfall) through the phases of a project
+(that is, analysis, design, development, testing). This involves fully documenting a project in advance,
+including the user interface, user stories, and all the features' variations and outcomes.
+
+Lifecycle
+- Requirements - Analysis
+	Understand the exact requirements of the customer and document them properly. This is a research - ask all the questions
+	remove incompleteness (missing requirement
+	software requirement specification (SRS) document. SRS document serves as a contract between development team and customers.
+	Any future dispute between the customers and the developers can be settled by examining the SRS document.
+- Design
+	design a technical solution to the problems set out by the product requirements, including scenarios, layouts and data models
+	transform the requirements specified in the SRS document into a structure that is suitable for implementation in some programming language.
+- Coding / Implementation / Unit testing 
+	Once the design is approved, technical implementation begins.
+	software design is translated into source code using any suitable programming language.
+- Test
+	The software testing team will use the design documents, personas and user case scenarios delivered by the product manager
+	in order to create their test cases.
+	Integration of different modules are undertaken soon after they have been coded and unit tested.
+- Deployment and Maintenance
+	correct errors that were not discovered during the product development phase.
+	enhance the functionalities of the system based on the customer's request.
+	
+Pros
+This model is very simple and is easy to understand.
+Phases in this model are processed one at a time.
+Each stage in the model is clearly defined.
+This model has very clear and well undestood milestones.
+Process, actions and results are very well documented.
+Reinforces good habits: define-before- design,
+design-before-code.
+This model works well for smaller projects and projects where requirements are well
+understood.
+
+
+Cons
+- late delivery of business value
+	customer can see the product at around the 2/3 part of lifecycle
+	It is difficult to accommodate any change requests after the requirements specification phase is complete.	
+- Frozen requirements
+	no error feedback path (ther is not any mechanism for error correction)
+- No overlapping of phases
+	This model recommends that new phase can start only after the completion of the previous phase.
+	But in real projects, this can't be maintained. To increase the efficiency and reduce the cost, phases may overlap.
+
+
+--------------------------------
+
+Spiral Model
+Spiral model is one of the most important Software Development Life Cycle models, which provides support for Risk Handling.
+In its diagrammatic representation, it looks like a spiral with many loops. The exact number of loops of the spiral is unknown
+and can vary from project to project. Each loop of the spiral is called a Phase of the software development process.
+The exact number of phases needed to develop the product can be varied by the project manager depending upon the project risks.
+As the project manager dynamically determines the number of phases, so the project manager has an important role to develop
+a product using the spiral model. 
+The Radius of the spiral at any point represents the expenses(cost) of the project so far, and the angular dimension represents
+the progress made so far in the current phase. 
+
+Quadrants
+1 - Objectives determination and identify alternative solutions: Requirements are gathered from the customers
+	and the objectives are identified, elaborated, and analyzed at the start of every phase.
+	Then alternative solutions possible for the phase are proposed in this quadrant. 
+
+2 - Identify and resolve Risks: During the second quadrant, all the possible solutions are evaluated to select
+	the best possible solution. Then the risks associated with that solution are identified and the risks are
+	resolved using the best possible strategy. At the end of this quadrant, the Prototype is built for the best possible solution. 
+
+3 - Develop next version of the Product: During the third quadrant, the identified features are developed and
+	verified through testing. At the end of the third quadrant, the next version of the software is available. 
+
+4 - Review and plan for the next Phase: In the fourth quadrant, the Customers evaluate the so far developed
+	version of the software. In the end, planning for the next phase is started. 
+ 
+Risk Handling in Spiral Model
+A risk is any adverse situation that might affect the successful completion of a software project.
+The most important feature of the spiral model is handling these unknown risks after the project has started.
+Such risk resolutions are easier done by developing a prototype. The spiral model supports coping up with risks by
+providing the scope to build a prototype at every phase of the software development. 
+
+Pros
+- Risk Handling:
+	The projects with many unknown risks that occur as the development proceeds, in that case,
+	Spiral Model is the best development model to follow due to the risk analysis and risk handling at every phase. 
+
+- Good for large projects:
+	It is recommended to use the Spiral Model in large and complex projects. 
+
+- Flexibility in Requirements:
+	Change requests in the Requirements at later phase can be incorporated accurately by using this model. 
+
+- Customer Satisfaction:
+	Customer can see the development of the product at the early phase of the software development and thus,
+	they habituated with the system by using it before completion of the total product. 
+	
+Cons
+- Complex: The Spiral Model is much more complex than other SDLC models. 
+- Expensive: Spiral Model is not suitable for small projects as it is expensive.  
+- Too much dependability on Risk Analysis:
+	The successful completion of the project is very much dependent on Risk Analysis. Without very highly experienced experts, it is going to be a failure to develop a project using this model.  
+- Difficulty in time management:
+	As the number of phases is unknown at the start of the project, so time estimation is very difficult. 	
+	
+	
+---------------------------------------
+
+RUP (IBM)
+Rational Unified Process (RUP) is a software development process for object-oriented models. It is also known as the Unified Process Model.
+It is created by Rational corporation and is designed and documented using UML (Unified Modeling Language).
+
+- Inception –
+	Communication and planning are main.
+	Identifies Scope of the project using use-case model allowing managers to estimate costs and time required.
+	Customers requirements are identified and then it becomes easy to make a plan of the project.
+	Project plan, Project goal, risks, use-case model, Project description, are made.
+	Project is checked against the milestone criteria and if it couldn't pass these criteria then project can be either cancelled or redesigned.
+- Elaboration –
+	Planning and modeling are main.
+	Detailed evaluation, development plan is carried out and diminish the risks.
+	Revise or redefine use-case model (approx. 80%), business case, risks.
+	Again, checked against milestone criteria and if it couldn't pass these criteria then again project can be cancelled or redesigned.
+	Executable architecture baseline.
+- Construction –
+	Project is developed and completed.
+	System or source code is created and then testing is done.
+	Coding takes place.
+- Transition –
+	Final project is released to public.
+	Transit the project from development into production.
+	Update project documentation.
+	Beta testing is conducted.
+	Defects are removed from project based on feedback from public.
+- Production –
+	Final phase of the model.
+	Project is maintained and updated accordingly.
+	
+	
+------------------------------------------
+
+DSDM
+The Dynamic Systems Development technique (DSDM) is an associate degree agile code development approach that
+provides a framework for building and maintaining systems. The DSDM philosophy is borrowed from a modified
+version of the sociologist principle—80 % of An application is often delivered in twenty percent of the time it'd
+desire deliver the entire (100 percent) application.
+DSDM is An iterative code method within which every iteration follows the 80% rule that simply enough work
+is needed for every increment to facilitate movement to the following increment. The remaining detail
+is often completed later once a lot of business necessities are noted or changes are requested and accommodated.
+
+- Feasibility Study:
+	It establishes the essential business necessities and constraints related to the applying to be
+	designed then assesses whether or not the application could be a viable candidate for the DSDM method.
+
+- Business Study:
+	It establishes the use and knowledge necessities that may permit the applying to supply business value;
+	additionally, it is the essential application design and identifies the maintainability necessities for the applying.
+
+- Functional Model Iteration:
+	It produces a collection of progressive prototypes that demonstrate practicality for the client.
+	(Note: All DSDM prototypes are supposed to evolve into the deliverable application.) The intent throughout
+	this unvarying cycle is to collect further necessities by eliciting feedback from users as they exercise the paradigm.
+
+- Design and Build Iteration:
+	It revisits prototypes designed throughout useful model iteration to make sure that everyone has been
+	designed during a manner that may alter it to supply operational business price for finish users.
+	In some cases, useful model iteration and style and build iteration occur at the same time.
+
+- Implementation:
+	It places the newest code increment (an operationalized prototype) into the operational surroundings. It ought to be noted that:
+	(a) the increment might not 100% complete or,
+	(b) changes are also requested because the increment is placed into place. In either case, DSDM development
+		work continues by returning to the useful model iteration activity.
+	
+
+---------------------------------
+
+
+FDD
+Feature-Driven Development. It is an agile iterative and incremental model that focuses on
+progressing the features of the developing software. The main motive os feature-driven development
+is to provide timely updated and working software to the client. In FDD, reporting and progress
+tracking is necessary at all levels.
+
+Lifecycle
+Build overall model / Build feature list / Plan by feature / Design by feature / Build by feature
+
+Advantages of FDD
+Reporting at all levels leads to easier progress tracking / Customer focused
+provides continuous success / Short iterative - Frequent releases
+Reduction in risks is observed as whole model and design is build in smaller segments / can focus on these two segments
+FDD provides greater accuracy in cost estimation of the project due to feature segmentation.
+
+Disadvantages of FDD
+This agile practice is not good for smaller projects.
+There is high dependency on lead programmers, designers and mentors.
+There is lack of documentation which can create an issue afterwards.
+
+
+--------------------------------------
+
+XP
+Extreme Programming is used to improve software quality and responsive to customer requirements.
+The extreme programming model recommends taking the best practices that have worked well in the past
+in program development projects to extreme levels.
+
+Best practices
+Code Review: Code review detects and corrects errors efficiently.
+
+Listening: Sometimes programmers may not have the depth knowledge of the system to be developed.
+	So, it is desirable for the programmers to understand properly the functionality of the system and they have to listen to the customers
+
+Testing: Testing code helps to remove errors and improves its reliability.
+
+Incremental development: Incremental development is very good because customer feedback is gained
+	and based on this development team come up with new increments every few days after each iteration.
+
+Simplicity: Simplicity makes it easier to develop good quality code as well as to test and debug it.
+
+Design: Good quality design is important to develop a good quality software. So, everybody should design daily.
+
+Integration testing: It helps to identify bugs at the interfaces of different functionalities.
+
+
+---------------------------------------
+
+
+Crystal method
+Crystal method is an agile software development approach that focuses primarily on people and their interactions
+when working on a project rather than on processes and tools. Alistair believed that people's skills and talents as well as the way they communicate has the biggest impact on the outcome of the project.
+
+Fundamentals:
+- Teams can streamline their processes as their work and become a more optimized team
+- Projects are unique and dynamic and require specific methods
+
+most suitable solution for your projects depends on three dimensions:
+Team size
+Criticality
+What the priority of the project is
+
+Clear - for teams of 8 or fewer people
+Yellow - for teams of 10-20 people
+Orange - for teams of 20-50 people
+Red - for teams of 50-100 people
+
+Human-powered
+This means that people involved in the project are vital and that the processes should be adapted to meet people's needs.
+It also emphasizes that people are capable of organizing themselves and that they can become more organized and competent as the processes develop.
+
+Adaptive
+Crystal is a stretch to fit methodology meaning that processes and tools are not fixed, but have to be adjusted to meet
+the requirements of the team and the project at hand.
+
+Ultra-light
+Crystal doesn't involve too much documentation, management and reporting. It keeps things light by focusing on
+transparent workflow between the team and the client and by practicing open communication between team members.
+
+Useful
+Frequent delivery
+technical environment with automated tests, configuration management, and frequent integration
+Active user involvement
+Flexible and configurable processes
+
+
+----------------------------------------
+
+Scrum
+It is a framework within which people can address complex adaptive problem while productivity and creativity of
+delivering product is at highest possible values. Scrum uses Iterative process.
+
+Features
+Scrum is light-weighted framework
+Scrum emphasizes self-organization
+Scrum is simple to understand
+Scrum framework help the team to work together
+
+Lifecycle of Scrum:
+Product Backlog:
+According to the prioritize features the product is organized.
+
+Release Planning:
+When the product is completed then it goes to the Release stage.
+
+Sprint Planning from Backlog:
+The Product Owner ensures that attendees are prepared to discuss the most important Product Backlog items and how they map to the Product Goal.
+Sprint Backlog is divided into two parts Product assigned features to sprint and Sprint planning meeting. **Planning poker
+
+Sprint Review:
+If the product still have some non-achievable features then it will be checked in this stage and then the product is
+passed to the Sprint Retrospective stage.
+
+Sprint Retrospective:
+In this stage quality or status of the product is checked.
+What went well (I LIKE...) / What went wrong (I WISH...) / What can be improved (WHAT IF...)
+
+
+
+Roles
+Product Owner
+The Product Owner is accountable for maximizing the value of the product resulting from the work of the Scrum Team.
+How this is done may vary widely across organizations, Scrum Teams, and individuals.
+The Product Owner is also accountable for effective Product Backlog management, which includes:
+- Developing and explicitly communicating the Product Goal;
+- Creating and clearly communicating Product Backlog items;
+- Ordering Product Backlog items; and,
+- Ensuring that the Product Backlog is transparent, visible and understood.
+The Product Owner is one person, not a committee.
+
+Development Team
+Developers are the people in the Scrum Team that are committed to creating any aspect of a usable Increment each Sprint.
+The specific skills needed by the Developers are often broad and will vary with the domain of work.
+However, the Developers are always accountable for:
+- Creating a plan for the Sprint, the Sprint Backlog;
+- Instilling quality by adhering to a Definition of Done;
+- Adapting their plan each day toward the Sprint Goal; and,
+- Holding each other accountable as professionals.
+
+Scrum Master
+The Scrum Master is accountable for the Scrum Team's effectiveness. They do this by enabling the Scrum Team to improve its practices,
+within the Scrum framework. Scrum Masters are true leaders who serve the Scrum Team and the larger organization.
+
+The Scrum Master serves the Scrum Team in several ways, including:
+- Coaching the team members in self-management and cross-functionality;
+- Helping the Scrum Team focus on creating high-value Increments that meet the Definition of Done;
+- Causing the removal of impediments to the Scrum Team's progress; and,
+- Ensuring that all Scrum events take place and are positive, productive, and kept within the timebox.
+
+The Scrum Master serves the Product Owner in several ways, including:
+- Helping find techniques for effective Product Goal definition and Product Backlog management;
+- Helping the Scrum Team understand the need for clear and concise Product Backlog items;
+- Helping establish empirical product planning for a complex environment; and,
+- Facilitating stakeholder collaboration as requested or needed.
+
+The Scrum Master serves the organization in several ways, including:
+- Leading, training, and coaching the organization in its Scrum adoption;
+- Planning and advising Scrum implementations within the organization;
+- Helping employees and stakeholders understand and enact an empirical approach for complex work; and,
+- Removing barriers between stakeholders and Scrum Teams.
+
+Advantage of using Scrum framework:
+Scrum framework is fast moving and money efficient.
+Scrum framework works by dividing the large product into small sub-products. It's like a divide and conquer strategy
+In Scrum customer satisfaction is very important.
+Scrum is adaptive in nature because it have short sprint.
+As Scrum framework rely on constant feedback therefore the quality of product increases in less amount of time
+
+Disadvantage of using Scrum framework:
+Scrum framework do not allow changes into their sprint.
+Scrum framework is not fully described model. If you wanna adopt it you need to fill in the framework with your own
+details like Extreme Programming(XP), Kanban, DSDM.
+It can be difficult for the Scrum to plan, structure and organize a project that lacks a clear definition.
+The daily Scrum meetings and frequent reviews require substantial resources.
+
+
+Sprint:
+A Sprint is a time-box of one month or less. A new Sprint starts immediately after the completion of the previous Sprint.
+During the Sprint:
+No changes are made that would endanger the Sprint Goal;
+Quality does not decrease;
+The Product Backlog is refined as needed; and,
+Scope may be clarified and renegotiated with the Product Owner as more is learned.
+
+Daily Scrum meetings
+The Daily Scrum is a 15-minute event for the Developers of the Scrum Team. To reduce complexity, it is held at the same time
+and place every working day of the Sprint. If the Product Owner or Scrum Master are actively working on items in the Sprint Backlog,
+they participate as Developers. Daily Scrums improve communications, identify impediments, promote quick decision-making,
+and consequently eliminate the need for other meetings.
+What did I work on yesterday? / What am I working on today? / What issues are blocking me?
+
+
+User stories
+"As a [persona], I [want to], [so that]."
+A user story is an informal, general explanation of a software feature written from the perspective of the end user.
+Its purpose is to articulate how a software feature will provide value to the customer.
+
+Independent / Negotiable / Valuable / Estimable / Small / Testable
+
+Benefits
+- Stories keep the focus on the user. A To Do list keeps the team focused on tasks that need checked off,
+	but a collection of stories keeps the team focused on solving problems for real users.
+- Stories enable collaboration. With the end goal defined, the team can work together to decide how best
+	to serve the user and meet that goal.
+- Stories drive creative solutions. Stories encourage the team to think critically and creatively about how
+	to best solve for an end goal.
+- Stories create momentum. With each passing story the development team enjoys a small challenges and a small win,
+	driving momentum.
+	
+How to write user stories
+- Definition of "Done"
+	The story is generally done when the user can complete the outlined task, but make sure to define what that is.
+- Outline subtasks or tasks
+	Decide which specific steps need to be completed and who is responsible for each of them.
+- User personas
+	For Whom? If there are multiple end users, consider making multiple stories.
+- Ordered Steps
+	Write a story for each step in a larger process.
+- Listen to feedback
+	Talk to your users and capture the problem or need in their words. No need to guess at stories when you can source
+	them from your customers.
+- Time
+	Time is a touchy subject. Many development teams avoid discussions of time altogether, relying instead on their
+	estimation frameworks. Since stories should be completable in one sprint, stories that might take weeks or months
+	to complete should be broken up into smaller stories or should be considered their own epic.
+	
+	
+Product Roadmap and a Release Plan
+product roadmap communicates the high-level overview of a product's strategy, while a release plan is a tactical document
+designed to capture and track the features planned for an upcoming release.
+Roadmap
+Communicates the "why" / Might cover a year or more / Often shared with executive stakeholders / Serves as a high level visual summary
+
+Release Plan
+Details the "what" / Spans only a few months / Typically an internal working document for the product and development teams  /
+Takes the strategy into an actionable plan built on specific
+
+
+Tracking the progress in Scrum
+Every day, the Team members update their estimate of the effort remaining to complete their current work in the Sprint Backlog.
+It is also common for someone to add up the effort remaining for the Team as a whole, and plot it on the Sprint Burndown Chart.
+This graph shows, each day, a new estimate of how much work remains until the Team is finished. Ideally,
+this is a downward sloping graph that is on a trajectory to reach "zero effort remaining" by the last day of the Sprint.
+The important thing is that it shows the Team their progress towards their goal, not in terms of how much time was spent in
+the past, but in terms of how much work remains in the future – what separates the Team from their goal.
+
+
+Demo
+This is a meeting that shares the product with stakeholders. The team directly communicates with stakeholders and
+receives feedback. Helps to build relationship between the team and stakeholders. Shows overall progress toward
+the final goal.
+
+https://www.atlassian.com/agile/scrum/
+
+-------------------------------------------------------
+
+LEAN
+Lean methodology continues to be popular with businesses due to its focus on reducing waste and improving efficiency in
+the interest of providing more value to customers. As a philosophical approach, Lean methodology enjoys broad
+applicability to processes within businesses of any size because of its ability to help organizations achieve
+business goals in a healthier, smarter, more sustainable way. Lean management enables organizations to optimize
+across the entire value stream – from shortening the vision to value cycle time, to improving speed and increasing
+overall quality throughout the production process, to improving the aspects that impact delivery – all in an
+effort to ultimately add value to customers.
+
+Principles
+- Optimize the whole
+	We have to ensure that all of those MOVING PARTS are aligned so that we are make the best use of our LIMITED RESOURCES.
+	Value Stream Mapping - The process of visualizing the current state and designing the future state of a value stream
+	to identify areas of improvement.
+
+- Eliminate waste
+	anything that does not add value to the customer – anything for which the customer would not willingly pay.
+	Waste can be:
+		context switching / overburden of employees / tedious processes / technical debt
+		lengthy feedback loops / unnecessary complexity in decision making / premature planning
+
+- Build quality into the system
+	In order to create a system that is built for growth, we error-proof the system by standardizing and automating as much as possible.
+	
+- Deliver fast by managing flow
+	in order for employees to be able to sustainably deliver quickly, they have to operate in an environment that permits them to focus.
+	Limiting work in process (WIP) at the team and individual levels.
+
+- Create knowledge
+	charges organizations with the challenge of designing, documenting, and continuously improving repeatable processes,
+	in order to reach the level of speed and accountability necessary for sustainable growth. This depends entirely on
+	your employees: You need to hire and retain talent that is motivated to continuously grow, share, cross-train,
+	and identify more areas for learning.
+	
+- Defer commitment
+	This principle encourages organizations to make decisions at the last responsible moment, in order to continuously
+	make decisions based on the most up-to-date, relevant, comprehensive information.
+
+- Respect people
+	create an environment where the best ideas are heard, where good employees are retained, and where leaders are
+	better able to understand the needs of their employees and their customers.
+
+
+----------------------------------------------
+
+KANBAN
+JIT principles by matching the amount of work in progress (WIP) to the team's capacity.
+This gives teams more flexible planning options, faster output, clearer focus, and transparency throughout the development cycle.
+
+The work of all kanban teams revolves around a kanban board, a tool used to visualize work and optimize the flow of the work among the team.
+Board function is to ensure the team's work is visualized, their workflow is standardized, and all blockers and dependencies are
+immediately identified and resolved.
+A basic kanban board has a three-step workflow: To Do, In Progress, and Done.
+
+The kanban methodology relies upon full transparency of work and real-time communication of capacity, therefore the kanban board
+should be seen as the single source of truth for the team's work.
+
+WIP limits
+In agile development, work in progress (WIP) limits set the maximum amount of work that can exist in each status of a workflow.
+Limiting the amount of work in progress makes it easier to identify inefficiency in a team's workflow.
+Bottlenecks in a team's delivery pipeline are clearly visible before a situation becomes dire.
+
+Cards
+The main purpose of representing work as a card on the kanban board is to allow team members to track the progress of work through
+its workflow in a highly visual manner.
+On virtual kanban boards will often also feature screenshots and other technical details that is valuable to the assignee.
+Allowing team members to see the state of every work item at any given point in time, as well as all of the associated details,
+ensures increased focus, full traceability, and fast identification of blockers and dependencies.
+
+Benefits
+- Planning flexibility
+	A kanban team is only focused on the work that's actively in progress. Once the team completes a work item,
+	they pluck the next work item off the top of the backlog. As long as the product owner keeps the most important work items
+	on top of the backlog, the development team is assured they are delivering maximum value back to the business.
+	
+- Shortened time cycles
+	Cycle time is the amount of time it takes for a unit of work to travel through the team's workflow–from the moment work
+	starts to the moment it ships. By optimizing cycle time, the team can confidently forecast the delivery of future work.
+	Overlapping skill sets lead to smaller cycle times. When only one person holds a skill set, that person becomes a bottleneck
+	in the workflow. So teams employ basic best practices like code review and mentoring help to spread knowledge.
+	Devs can test too not QA only
+	
+- Fewer bottlenecks
+	Work-in-progress limits highlight bottlenecks and backups in the team's process due to lack of focus, people, or skill sets.
+
+- Visual metrics
+	One of the core values is a strong focus on continually improving team efficiency and effectiveness with every iteration of work.
+	Charts provide a visual mechanism for teams to ensure they're continuing to improve. When the team can see data, it's easier to
+	spot bottlenecks in the process (and remove them).
+	
+- Continuous Delivery
+	Continuous delivery (CD) is the practice of releasing work to customers frequently. Continuous integration (CI) is the
+	practice of automatically building and testing code incrementally throughout the day. Together they form a CI/CD pipeline
+	that is essential for development teams (especially for DevOps teams) to ship software faster while ensuring high quality.
+	
+**Kanplan
+Kanplan is a mixed methodology for practicing agile software development. Like scrumban, it combines features from both scrum and kanban.
+Kanplan is ideal for teams who want the ability to backlog groom, but don't want to work in sprints. 
+
+
+-------------------------------------------------
+
+Scrum vs. kanban
+
+ 	
+					SCRUM										KANBAN
+Cadence				Regular fixed length sprints				Continuous flow
+--------------------------------------------------------------|-----------------------------------------------------
+Release				At the end of each sprint if				Continuous delivery or at the team's discretion
+methodology			approved by the product owner
+--------------------------------------------------------------|-----------------------------------------------------
+Roles				Product owner, scrum master, dev team		No existing roles. Some teams enlist the help of an agile coach.
+--------------------------------------------------------------|-----------------------------------------------------
+Key Metrics			Velocity									Cycle time
+--------------------------------------------------------------|-----------------------------------------------------
+Change philosophy	Teams should strive to not make changes		Change can happen at any time
+					to the sprint forecast during the sprint.
+					Doing so compromises learnings around
+					estimation.
+					
+					
+---------------------------------------------------
+
+Spotify model
+The Spotify model is a people-driven, autonomous approach for scaling agile that emphasizes the importance of culture and network.
+It has helped Spotify and other organizations increase innovation and productivity by focusing on autonomy, communication, accountability, and quality.
+
+Key elements
+The Spotify model is centered around simplicity. When Spotify began organizing around their work, they identified a handful of
+important elements on how people and teams should be structured.
+
+- Squads
+	Similar to a scrum team, Squads are cross-functional, autonomous teams (typically 6-12 individuals) that focus on one feature area.
+	Each Squad has a unique mission that guides the work they do, an agile coach for support, and a product owner for guidance.
+	Squads determine which agile methodology/framework will be used.
+
+- Tribes
+	When multiple Squads coordinate within each other on the same feature area, they form a Tribe.
+	Tribes help build alignment across Squads and typically consist of 40 - 150 people in order to maintain alignment
+	(leveraging what we call Dunbar's Number). Each Tribe has a Tribe Lead who is responsible for helping coordinate
+	across Squads and for encouraging collaboration.
+
+- Chapter
+	Even though Squads are autonomous, it's important that specialists (e.g. Javascript Developer, DBAs) align on best practices.
+	Chapters are the family that each specialist has, helping to keep engineering standards in place across a discipline.
+	Chapters are typically led by a senior technology lead, who may also be the manager for the team members in that Chapter.
+
+- Guild
+	Team members who are passionate about a topic can form a Guild, which essentially is a community of interest.
+	Anyone can join a Guild and they are completely voluntary. Whereas Chapters belong to a Tribe, Guilds can cross different Tribes.
+	There is no formal leader of a Guild. Rather, someone raises their hand to be the Guild Coordinator and help bring people together.
+
+- Trio
+	The Trio (aka TPD Trio) is a combination of a Tribe Lead, product lead, and design lead. Each Tribe has a Trio in place to
+	ensure there is continuous alignment between these three perspectives when working on features areas.
+
+- Alliance
+	As organizations scale, sometimes multiple Tribes need to closely work together to accomplish a goal.
+	Alliances are a combination of Tribe Trios (typically three or more) that work together to help their Tribes
+	collaborate on a goal that is bigger than any one Tribe.
+	
+Benefits
+- Less formal process and ceremony
+	Instead of requiring Squads to change how they do their work, it focuses on aligning them with each other and
+	driving towards individual team outcomes.
+	
+- More self-management and autonomy
+	The Spotify model can offer increased transparency across the work being done and grow a more experimentation-based
+	approach to problem solving in a high trust environment. All this can lead to things like better products,
+	happier customers, and more engaged employees.
+	
+Challenges
+- Autonomy and trust is key
+- Transparency with community
+- Encourage mistakes
+
+
+-----------------------------------------------------
+
+DevOps
+DevOps is the combination of cultural philosophies, practices, and tools that increases an organization's ability to deliver
+applications and services at high velocity: evolving and improving products at a faster pace than organizations using
+traditional software development and infrastructure management processes. This speed enables organizations to better serve
+their customers and compete more effectively in the market.
+
+Automate processes that historically have been manual and slow. They use a technology stack and tooling which help them
+operate and evolve applications quickly and reliably. These tools also help engineers independently accomplish tasks
+(for example, deploying code or provisioning infrastructure) that normally would have required help from other teams,
+and this further increases a team's velocity.
+
+Benefits 
+- Speed
+	Move at high velocity so you can innovate for customers faster, adapt to changing markets better, and grow more
+	efficient at driving business results. 
+	
+- Rapid Delivery
+	Increase the frequency and pace of releases so you can innovate and improve your product faster. The quicker you can release
+	new features and fix bugs, the faster you can respond to your customers' needs and build competitive advantage.
+
+- Reliability
+	Ensure the quality of application updates and infrastructure changes so you can reliably deliver at a more rapid pace
+	while maintaining a positive experience for end users. (monitoring and logging)
+
+- Scale
+	Operate and manage your infrastructure and development processes at scale. Automation and consistency help you
+	manage complex or changing systems efficiently and with reduced risk.
+
+- Improved Collaboration
+	Build more effective teams under a DevOps cultural model, which emphasizes values such as ownership and accountability.
+	Developers and operations teams collaborate closely, share many responsibilities, and combine their workflows.
+	
+- Security
+	Move quickly while retaining control and preserving compliance. You can adopt a DevOps model without sacrificing
+	security by using automated compliance policies, fine-grained controls, and configuration management techniques.
+
+Continuous integration
+	where developers regularly merge their code changes into a central repository, after which automated builds and tests are run.
+	Continuous integration most often refers to the build or integration stage of the software release process and entails both
+	an automation component (e.g. a CI or build service) and a cultural component (e.g. learning to integrate frequently).
+	The key goals of continuous integration are to find and address bugs quicker, improve software quality, and reduce the time
+	it takes to validate and release new software updates.
+
+Continuous delivery
+	code changes are automatically prepared for a release to production. A pillar of modern application development,
+	continuous delivery expands upon continuous integration by deploying all code changes to a testing environment and/or
+	a production environment after the build stage. When properly implemented, developers will always have a deployment-ready
+	build artifact that has passed through a standardized test process. 
+	Continuous delivery lets developers automate testing beyond just unit tests so they can verify application updates across
+	multiple dimensions before deploying to customers.
+	
+Continuous Delivery vs. Continuous Deployment
+	With continuous delivery, every code change is built, tested, and then pushed to a non-production testing or staging environment.
+	There can be multiple, parallel test stages before a production deployment. The difference between continuous delivery and
+	continuous deployment is the presence of a manual approval to update to production. With continuous deployment,
+	production happens automatically without explicit approval.
+
+https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment
+
+--------------------------------------------------------
+
+CMMI - Capability Maturity Model Integration
+Originally created for the U.S. Department of Defense to assess the quality and capability of their software contractors,
+CMMI models have expanded beyond software engineering to help any organization in any industry build, improve, and measure
+their capabilities and improve performance.
+
+The maturity level or capability level of an organization provides a way to characterize its capability and performance.
+Experience has shown that organizations do their best when they focus their process improvement eﬀorts on a prioritized and
+manageable number of practice areas at a time.
+
+Each level builds on the previous maturity levels by adding new functionality or rigor.
+Capability Levels
+0: Incomplete
+	Incomplete approach to meeting the intent of the Practice Area.
+	May or may not be meeting the intent of any practice.
+	Inconsistent performance.
+1: Initial
+	Initial approach to meeting the intent of the Practice Area.
+	Not a complete set of practices to meeting the full intent of the Practice Area.
+	Addresses performance issues.
+2: Managed
+	Subsumes level 1 practices.
+	Simple, but complete set of practices that address the full intent of the Practice Area.
+	Does not require the use of the organizational assets.
+	Identifies and monitors progress towards project performance objectives.
+3: Defined
+	Builds on level 2 practices.
+	Uses organizational standards and tailoring to address project and work characteristics.
+	Projects use and contribute to organization assets.
+	Focuses on achieving both project and organizational performance objectives.
+	
+Maturity Levels
+0: Incomplete
+	Ad hoc and unknown. Work may or may not get completed.
+
+1: Initial
+	Unpredictable and reactive. Work gets completed but is often delayed and over budget.
+
+2: Managed
+	Managed on the project level. Projects are planned, performed, measured, and controlled.
+
+3: Defined
+	Proactive, rather than reactive. Organization-wide standards provide guidance across projects, programs, and portfolios.
+
+4: Quantitatively Managed
+	Measured and controlled. Organization is data-driven with quantitative performance improvement objectives that are
+	predictable and align to meet the needs of internal and external stakeholders.
+
+5: Optimizing
+	Stable and flexible. Organization is focused on continuous improvement and is built to pivot and respond to
+	opportunity and change. The organization's stability provides a platform for agility and innovation.
+	
+
+-------------------------------------------------------
+
+Six Sigma
+Six Sigma is the process of producing high and improved quality output. This can be done in two phases – identification and elimination.
+The cause of defects is identified and appropriate elimination is done which reduces variation in whole processes.
+
+Characteristics of Six Sigma:
+- Statistical Quality Control:
+	Six Sigma is derived from the Greek Letter ? which denote Standard Deviation in statistics. Standard Deviation is used
+	for measuring the quality of output.
+
+- Methodical Approach:
+	The Six Sigma is a systematic approach of application in DMAIC and DMADV which can be used to improve the quality of production.
+	DMAIC means for Design-Measure- Analyze-Improve-Control. While DMADV stands for Design-Measure-Analyze-Design-Verify.
+
+- Fact and Data-Based Approach:
+	The statistical and methodical method shows the scientific basis of the technique.
+	
+- Project and Objective-Based Focus:
+	The Six Sigma process is implemented to focus on the requirements and conditions.
+
+- Customer Focus:
+	The customer focus is fundamental to the Six Sigma approach. The quality improvement and control standards are based on
+	specific customer requirements.
+
+- Teamwork Approach to Quality Management:
+	The Six Sigma process requires organizations to get organized for improving quality.
+
+Six Sigma Methodologies:
+Two methodologies used in the Six Sigma projects are DMAIC and DMADV.
+
+DMAIC is used to enhance an existing business process. The DMAIC project methodology has five phases:
+Define (problem or opportunity for improvement)
+Measure (performance)
+Analyze (root cause - variations or defects)
+Improve (reduce or eleminate variations or defects)
+Control (monitor and stay at optimum level)
+
+DMADV is used to create new product designs or process designs. The DMADV project methodology also has five phases:
+Define / Measure / Analyze / Design / Verify
+
+
+---------------------------------------------
+
+Agile Manifesto
+Individuals and interactions over processes and tools
+Working software over comprehensive documentation
+Customer collaboration over contract negotiation
+Responding to change over following a plan
+
+Principles
+Our highest priority is to satisfy the customer
+through early and continuous delivery
+of valuable software.
+
+Welcome changing requirements, even late in
+development. Agile processes harness change for
+the customer's competitive advantage.
+
+Deliver working software frequently, from a
+couple of weeks to a couple of months, with a
+preference to the shorter timescale.
+
+Business people and developers must work
+together daily throughout the project.
+
+Build projects around motivated individuals.
+Give them the environment and support they need,
+and trust them to get the job done.
+
+The most efficient and effective method of
+conveying information to and within a development
+team is face-to-face conversation.
+
+Working software is the primary measure of progress.
+
+Agile processes promote sustainable development.
+The sponsors, developers, and users should be able
+to maintain a constant pace indefinitely.
+
+Continuous attention to technical excellence
+and good design enhances agility.
+
+Simplicity--the art of maximizing the amount
+of work not done--is essential.
+
+The best architectures, requirements, and designs
+emerge from self-organizing teams.
+
+At regular intervals, the team reflects on how
+to become more effective, then tunes and adjusts
+its behavior accordingly.
+
+
+------------------------------------------------------------------------
+
+Objects Oriented Design
+
+Objects - The instance of a class / it's the working entity of a class
+Classes - This is the model or standard about the capability of what an object can do
+
+Encapsulation
+Encapsulation is achieved when each object keeps its state private, inside a class. Other objects don't have
+direct access to this state. Instead, they can only call a list of public functions — called methods.
+So, the object manages its own state via methods — and no other class can touch it unless explicitly allowed.
+If you want to communicate with the object, you should use the methods provided. But (by default), you can't change the state.
+
+Abstraction
+Abstraction is an extension of encapsulation. It is the process of selecting data from a larger pool
+to show only the relevant details to the object.
+
+Inheritance
+Inheritance is the ability of one object to acquire some/all properties of another object.
+For example, a child inherits the traits of his/her parents. With inheritance, reusability is a major advantage.
+The child class reuses all fields and methods of the parent class (common part) and can implement its own (unique part).
+
+Polymorphism
+Polymorphism gives us a way to use a class exactly like its parent so there is no confusion with mixing types.
+This being said, each child sub-class keeps its own functions/methods as they are.
+This typically happens by defining a (parent) interface to be reused. It outlines a bunch of common methods.
+Then, each child class implements its own version of these methods.
+
+
+------------------------------------------------------------------------
+
+Functional requirements
+are product features or functions that developers must implement to enable users to accomplish their tasks.
+So, it's important to make them clear both for the development team and the stakeholders. Generally, functional requirements
+describe system behavior under specific conditions.
+
+Source can be
+- Software requirements specification document
+	The SRS contains descriptions of functions and capabilities that the product must provide.
+	
+- Use cases
+	Use cases describe the interaction between the system and external users that leads to achieving particular goals.
+	Each use case includes three main elements:
+		- Actors. These are the users outside the system that interact with the system.
+		- System. The system is described by functional requirements that define an intended behavior of the product.
+		- Goals. The purposes of the interaction between the users and the system are outlined as goals.
+
+- User stories
+	A user story is a documented description of a software feature seen from the end-user perspective.
+	The user story describes what exactly the user wants the system to do. In Agile projects, user stories are
+	organized in a backlog, which is an ordered list of product functions. Currently, user stories are considered
+	to be the best format for backlog items.
+	As a <type of user>, I want <some goal> so that <some reason>.
+
+
+- Work Breakdown Structure (WBS) (functional decomposition)
+	A functional decomposition or WBS is a visual document that illustrates how complex processes break down into their simpler components.
+	WBS is an effective approach to allow for an independent analysis of each part. WBS also helps capture the full picture of the project.
+	Logic of functional decomposition: High Level Function ->Sub-function -> Process -> Activity
+		Find the most general function.
+		Find the closest sub function.
+		Find the next level of sub function.
+		Check your diagram.
+
+- Prototypes
+	Software prototype is an umbrella term for different forms of early stage deliverables that are built to showcase how requirements
+	must be implemented. Prototypes help bridge the vision gaps and let stakeholders and teams clarify complicated areas of products
+	in development. Traditionally, prototypes represent how the solution will work and give examples of how users will interact with
+	it to accomplish their tasks.
+	
+- Models and diagrams
+
+----------------------------------------------------------
+
+
+Non-Functional requirements
+describe how a system must behave and establish constraints of its functionality.
+This type of requirements is also known as the system's quality attributes.
+
+- Usability
+	defines how difficult it will be for a user to learn and operate the system.
+	Usability can be assessed from different points of view:
+		- Efficiency of use: the average time it takes to accomplish a user's goals, how many tasks a user can complete without any help,
+		the number of transactions completed without errors, etc.
+		- Intuitiveness: how simple it is to understand the interface, buttons, headings, etc.
+		- Low perceived workload: how many attempts are needed by users to accomplish a particular task.
+
+- Security
+	Security requirements ensure that the software is protected from unauthorized access to the system and its stored data.
+	It considers different levels of authorization and authentication across different users roles. For instance, data privacy
+	is a security characteristic that describes who can create, see, copy, change, or delete information.
+	Security also includes protection against viruses and malware attacks.
+
+- Reliability
+	Reliability defines how likely it is for the software to work without failure for a given period of time. Reliability decreases
+	because of bugs in the code, hardware failures, or problems with other system components. To measure software reliability,
+	you can count the percentage of operations that are completed correctly or track the average period of time the system runs before failing.
+
+- Performance
+	Performance is a quality attribute that describes the responsiveness of the system to various user interactions with it.
+	Poor performance leads to negative user experience. It also jeopardizes system safety when it’s is overloaded.
+
+- Availability
+	Availability is gauged by the period of time that the system’s functionality and services are available for use with all operations.
+	So, scheduled maintenance periods directly influence this parameter. And it’s important to define how the impact of maintenance
+	can be minimized. When writing the availability requirements, the team has to define the most critical components of the system
+	that must be available at all time. You should also prepare user notifications in case the system or one of its parts becomes unavailable.
+
+- Scalability
+	Scalability requirements describe how the system must grow without negative influence on its performance. This means serving more users,
+	processing more data, and doing more transactions. Scalability has both hardware and software implications. For instance, you can
+	increase scalability by adding memory, servers, or disk space. On the other hand, you can compress data, use optimizing algorithms, etc.
+
+
+------------------------------------------------------------
+
+FURPS+ requirements
+- Functionality
+	feature sets / capabilities / security
+
+- Usability
+	human factors (see Concepts: User-Centered Design)
+	aesthetics
+	consistency in the user interface (see Guidelines: User-Interface)
+	online and context-sensitive help
+	wizards and agents
+	user documentation
+	training materials
+
+- Reliability
+	frequency and severity of failure
+	recoverability
+	predictability
+	accuracy
+	mean time between failure (MTBF)
+
+- Performance
+	speed
+	efficiency
+	availability
+	accuracy
+	throughput
+	response time
+	recovery time
+	resource usage
+
+- Supportability
+	testability
+	extensibility
+	adaptability
+	maintainability
+	compatibility
+	configurability
+	serviceability
+	installability
+	localizability (internationalization)
+
+The "+" in FURPS+ reminds you to include such requirements as:
+- design constraints
+	specifies or constrains the design of a system.
+
+- implementation requirements
+	required standards
+	implementation languages
+	policies for database integrity
+	resource limits
+	operation environments
+
+- interface requirements
+	an external item with which a system must interact
+	constraints on formats, timings, or other factors used by such an interaction
+
+- physical requirements.
+	material
+	shape
+	size
+	weight
+	
+----------------------------------------------------------
+
+Domain modeling
+is a structured visual representation of interconnected concepts or real-world objects that incorporates vocabulary,
+key concepts, behavior, and relationships of all of its entities. Use Noun Phrase Identification to Single Out Conceptual Classes
+Most of the time a domain model is illustrated with a set of class diagrams which may show:
+	domain objects or conceptual classes
+	associations between conceptual classes
+	attributes of conceptual classes
+
+------------------------------------------------------------
+
+CRC Card
+
+	Class Name
+	-----------------|----------------
+	Responsibilitie  |  Collaborators
+	
+Class represents a collection of similar objects. An object is a person, place, thing, event, or concept that is relevant to the system at hand. 
+Responsibility is anything that a class knows or does. For example, students have names, addresses, and phone numbers.
+Collaboration takes one of two forms: A request for information or a request to do something.
+
+------------------------------------------------------------
+
+Class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that describes the structure
+of a system by showing the system's:
+	classes,
+	their attributes,
+	operations (or methods),
+	and the relationships among objects.
+	
+Class Name:
+	The name of the class appears in the first partition.
+
+Class Attributes:
+	Attributes are shown in the second partition.
+	The attribute type is shown after the colon.
+	Attributes map onto member variables (data members) in code.
+
+Class Operations (Methods):
+	Operations are shown in the third partition. They are services the class provides.
+	The return type of a method is shown after the colon at the end of the method signature.
+	The return type of method parameters are shown after the colon following the parameter name. Operations map onto class methods in code
+	
+https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/
+
+
+-----------------------------------------------------------
+
+
+Relationships between classes
+Inheritance (or Generalization):
+	A generalization is a taxonomic relationship between a more general classifier and a more specific classifier.
+	Each instance of the specific classifier is also an indirect instance of the general classifier.
+	Thus, the specific classifier inherits the features of the more general classifier.
+
+	Represents an "is-a" relationship.
+	SubClasses are specializations of SuperClass.
+
+Association
+	relationships between classes in a UML Class Diagram. Associations are typically named using a verb or verb phrase
+	which reflects the real world problem domain.
+	
+Aggregation
+	A special type of association.
+	It represents a "part of" relationship.
+	Class2 is part of Class1.
+	Many instances (denoted by the *) of Class2 can be associated with Class1.
+	Objects of Class1 and Class2 have separate lifetimes.
+	
+Composition
+	A special type of aggregation where parts are destroyed when the whole is destroyed.
+	Objects of Class2 live and die with Class1.
+	Class2 cannot stand by itself.
+	
+--------------------------------------------------------------
+
+SOLID
+is an acronym for the first five object-oriented design (OOD) principles by Robert C. Martin (also known as Uncle Bob).
+
+Single-Responsibility Principle
+	A class should have one and only one reason to change, meaning that a class should have only one job.
+	The class or module should solve one and only one problem So it should have a single reason to change.
+	It makes our code more cohesive hence make it easy to test and maintain.
+	
+Open-Closed Principle
+	Objects or entities should be open for extension but closed for modification.
+	Existed and well-tested class should not be modified when a new feature needs to be built.
+	It may introduce a new bug when we modify an existing class to make a new feature.
+	So rather than changing an existing class/Interface, we should extend that class/Interface
+	in a new class to add new features.
+	
+Liskov Substitution Principle	
+	Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
+	This principle is named after the name of Barbara Liskov. She introduced this principle in 1987.
+	
+Interface Segregation Principle
+	This principle states that an interface should not enforce unwanted methods to a class. The idea here is instead of
+	having a large interface we should have smaller interfaces, so we should not create an interface having a lot of
+	methods If we have such an interface we should break in into smaller interfaces.
+	
+Dependency Inversion Principle
+	Higher level classes should not directly depend on lower level classes but abstractions. It means that a higher level class
+	should not need to know the implementation details of the low-level class, the low-level class should be hidden behind an abstraction.
+	
+	
+-----------------------------------------------------------------
+
+DRY — Don’t Repeat Yourself.
+A single piece of information should be present in only one place and in an authoritative manner in your system.
+Avoid redundant repeated code. If you are reiterating the same code almost everywhere in your system,
+that piece of code has to be locked up as a method for good.
+Divide your code and logic into smaller reusable units and use that code by calling it where you want.
+Less code is good: It saves time and effort, is easy to maintain, and also reduces the chances of bugs.
+
+
+------------------------------------------------------------------
+
+KISS: Keep It Simple, Stupid
+Keep the code simple and clear, making it easy to understand. Keep coding simple and straightforward. Keep your methods small.
+Each method should only solve one small problem, not many use cases. If you have a lot of conditions in the method,
+break these out into smaller methods. It will not only be easier to read and maintain, but it can help find bugs a lot faster.
+
+
+--------------------------------------------------------------------
+
+Design Patterns
+https://www.oodesign.com/
+https://betterprogramming.pub/javascript-design-patterns-25f0faaaa15
