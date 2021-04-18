@@ -1,0 +1,540 @@
+Critical rendering path
+The Critical Rendering Path is the sequence of steps the browser goes through to convert the HTML, CSS, and JavaScript into pixels on the screen.
+Optimizing the critical render path improves render performance.The critical rendering path includes the Document Object Model (DOM),
+CSS Object Model (CSSOM), render tree and layout.
+
+The document object model is created as the HTML is parsed. The HTML may request JavaScript, which may, in turn, alter the DOM.
+The HTML includes or makes requests for styles, which in turn builds the CSS object model. The browser engine combines the two to create the Render Tree.
+Layout determines the size and location of everything on the page. Once layout is determined, pixels are painted to the screen.
+
+DOM - Document Object Model
+The HTML response turns into tokens which turns into nodes which turn into the DOM Tree. A single DOM node starts with a startTag
+token and ends with an endTag token. Nodes contain all relevant information about the HTML element. The information is described using tokens.
+Nodes are connected into a DOM tree based on token hierarchy. If another set of startTag and endTag tokens come between a set of
+startTag and endTags, you have a node inside a node, which is how we define the hierarchy of the DOM tree.
+
+Bytes → characters → tokens → nodes → object model.
+3C 62 →
+<html><head>...</head><body><p>Hello <span>World</span>... →
+StartTag: html, StartTag: head - EndTag: head, StartTag: body, StartTag: p, Hello, StartTag: span...  →
+html, head, meta, body, p, Hello, span →
+DOM Tree (hierarchy)
+
+Steps
+Conversion: The browser reads the raw bytes of HTML off the disk or network, and translates them to individual characters based
+	on specified encoding of the file (for example, UTF-8).
+Tokenizing: The browser converts strings of characters into distinct tokens—as specified by the W3C HTML5 standard;
+	for example, "<html>", "<body>"—and other strings within angle brackets. Each token has a special meaning and its own set of rules.
+Lexing: The emitted tokens are converted into "objects," which define their properties and rules.
+DOM construction: Finally, because the HTML markup defines relationships between different tags (some tags are contained within other tags)
+	the created objects are linked in a tree data structure that also captures the parent-child relationships defined in the original markup:
+	the HTML object is a parent of the body object, the body is a parent of the paragraph object, and so on.
+	
+1) Begin constructing the DOM by parsing HTML
+2) Request CSS and JS resources
+3) Parse CSS and costruct the CSSOM Tree
+4) Execute JS
+5) Merge DOM and CSSOM into the Render Tree
+6) Run layout and paint
+	
+CSS Object Model
+The CSSOM contains all the styles of the page; information on how to style that DOM. While the DOM construction is incremental, CSSOM is not.
+CSS is render blocking: the browser blocks page rendering until it receives and processes all of the CSS. CSS is render blocking because
+rules can be overwritten, so the content can't be rendered until the CSSOM is complete.
+As the parser converts tokens to nodes, with descendants of nodes inheriting styles.
+more specific tag needs more work by browser
+
+CSS performance optimization
+Browsers follow a specific rendering path: paint only occurs after layout, which occurs after the render tree is created, which in turn
+requires both the DOM and the CSSOM trees. To optimize the CSSOM construction, remove unnecessary styles, minify, compress and cache it,
+and split CSS not required at page load into additional files to reduce CSS render blocking.
+The browser blocks rendering until it parses all of these styles but will not block rendering on styles it knows it will not use,
+such the print stylesheets. By splitting the CSS into multiple files based on media queries, you can prevent render blocking during
+download of unused CSS.
+
+By default the browser assumes that each specified style sheet is render blocking. Tell the browser when the style sheet should be
+applied by adding a media attribute with the media query. When the browser sees a style sheet it knows that it only needs to apply
+it for a specific scenario, it still downloads the stylesheet, but doesn't render block.
+Some elements, including <video>, <canvas> and <iframe>, are also on their own layer. When an element is promoted as a layer, also
+known as composited, animating transform properties is done in the GPU, resulting in improved performance, especially on mobile.
+Properties that will lead to compositing include 3D transforms (transform: translateZ(), rotate3d(), etc.), animating transform
+and opacity, position: fixed, will-change, and filter.
+
+Will-change property
+tells browsers which properties of an element are expected to change enabling browsers to set up optimizations before the element
+is actually changed, improving performance by doing potentially expensive work before it is required.
+font-display property - display text then change it's font-display
+contain property - an element and its contents are, as much as possible, independent of the rest of the document tree.
+
+Render Tree
+The render tree captures both the content and the styles: the DOM and CSSOM trees are combined into the render tree.
+To construct the render tree, the browser checks every node, starting from root of the DOM tree, and determine which CSS rules are attached.
+The render tree only captures visible content. (span display none wont be the part of the tree)
+
+Layout
+Once the render tree is built, layout becomes possible. Layout is dependent on the size of screen. The layout step determines where
+and how the elements are positioned on the page, determining the width and height of each element, and where they are in relation to each other.
+The viewport meta tag defines the width of the layout viewport, impacting the layout. Without it, the browser uses the default viewport width,
+which on by-default full screen browsers is generally 960px.
+Layout performance is impacted by the DOM -- the greater the number of nodes, the longer layout takes.
+
+Paint
+The last step is painting the pixels to the screen. Once the render tree is created and layout occurs, the pixels can be painted to the screen.
+
+Optimizing for CRP
+Improve page load speed by prioritizing which resources get loaded, controlling the order in which they are loaded, and reducing
+the file sizes of those resources. Performance tips include
+1) minimizing the number of critical resources by deferring their download, marking them as async, or eliminating them altogether,
+2) optimizing the number of requests required along with the file size of each request, and
+3) optimizing the order in which critical resources are loaded by prioritizing the downloading critical assets, shorten the critical path length.
+
+Render blocking CSS
+By default, CSS is treated as a render blocking resource, which means that the browser won't render any processed content until the
+CSSOM is constructed. Make sure to keep your CSS lean, deliver it as quickly as possible, and use media types and queries to unblock rendering.
+
+Render blocking JS
+JavaScript allows us to modify just about every aspect of the page: content, styling, and its response to user interaction.
+However, JavaScript can also block DOM construction and delay when the page is rendered. To deliver optimal performance,
+make your JavaScript async and eliminate any unnecessary JavaScript from the critical rendering path. (onload event - eg.: analytics)
+- The location of the script in the document is significant.
+- When the browser encounters a script tag, DOM construction pauses until the script finishes executing.
+- JavaScript can query and modify the DOM and the CSSOM.
+- JavaScript execution pauses until the CSSOM is ready.
+
+General strategies
+Minify, compress, cache (HTML, JS, CSS)
+Minimize use of render blocking resources (CSS - use media queries or ?inline css)
+Minimize use of parser blocking resources (JS - defer js execution, async)
+
+Minimize data transfer (less bytes - faster page)
+Reduce critical resources
+Shorten the CRP (less html, less server request)
+
+Preload content
+The preload value of the <link> element's rel attribute lets you declare fetch requests in the HTML's <head>, specifying resources
+that your page will need very soon, which you want to start loading early in the page lifecycle, before browsers' main rendering
+machinery kicks in. This ensures they are available earlier and are less likely to block the page's render, improving performance.
+
+
+Frame pipleline
+visual changes (JS, CSS animations, Web animation API)
+JS - Style - Layout - Paint - Composite (puts individual layers together)
+
+JavaScript
+	Typically JavaScript is used to handle work that will result in visual changes, whether it's jQuery's animate function, sorting a data set,
+	or adding DOM elements to the page. It doesn't have to be JavaScript that triggers a visual change, though: CSS Animations, Transitions, and
+	the Web Animations API are also commonly used.
+Style calculations
+	This is the process of figuring out which CSS rules apply to which elements based on matching selectors, for example,
+	.headline or .nav > .nav__item. From there, once rules are known, they are applied and the final styles for each element are calculated.
+Layout
+	The layout is a process to find the geometry of elements. The main thread walks through the DOM and computed styles and creates
+	the layout tree which has information like x y coordinates and bounding box sizes. Layout tree may be similar structure to the DOM tree,
+	but it only contains information related to what's visible on the page. If display: none is applied, that element is not part of the
+	layout tree (however, an element with visibility: hidden is in the layout tree).
+Paint
+	Painting is the process of filling in pixels. It involves drawing out text, colors, images, borders, and shadows, essentially every
+	visual part of the elements. The drawing is typically done onto multiple surfaces, often called layers.
+Compositing
+	Now that the browser knows the structure of the document, the style of each element, the geometry of the page, and the paint order.
+	Turning this information into pixels on the screen is called rasterizing.	
+
+You can see how your website is divided into layers in DevTools using Layers panel.
+
+Scenarios
+1 - JS / CSS > Style > Layout > Paint > Composite - The full pixel pipeline
+	If you change a "layout" property, so that's one that changes an element's geometry, like its width, height, or its position with left
+	or top, the browser will have to check all the other elements and "reflow" the page. Any affected areas will need to be repainted,
+	and the final painted elements will need to be composited back together.
+2 - JS / CSS > Style > Paint > Composite - The  pixel pipeline without layout.
+	If you changed a “paint only” property, like a background image, text color, or shadows, in other words one that does not affect
+	the layout of the page, then the browser skips layout, but it will still do paint.
+3 - JS / CSS > Style > Composite - The pixel pipeline without layout or paint.
+	If you change a property that requires neither layout nor paint, and the browser jumps to just do compositing.  (example???)
+
+----------------------------------------
+
+RAIL
+is a user-centric performance model that provides a structure for thinking about performance. The model breaks down the user's
+experience into key actions (for example, tap, scroll, load) and helps you define performance goals for each of them.
+RAIL stands for four distinct aspects of web app life cycle: response, animation, idle, and load.
+
+User perception of performance delays
+0 to 16 ms
+	Users are exceptionally good at tracking motion, and they dislike it when animations aren't smooth. They perceive animations as smooth
+	so long as 60 new frames are rendered every second. That's 16 ms per frame, including the time it takes for the browser to paint the
+	new frame to the screen, leaving an app about 10 ms to produce a frame.
+0 to 100 ms
+	Respond to user actions within this time window and users feel like the result is immediate. Any longer, and the connection between
+	action and reaction is broken.
+100 to 1000 ms
+	Within this window, things feel part of a natural and continuous progression of tasks. For most users on the web, loading pages or
+	changing views represents a task.
+1000 ms or more
+	Beyond 1000 milliseconds (1 second) users lose focus on the task they are performing.
+10000 ms or more
+	Beyond 10000 milliseconds (10 seconds), users are frustrated and are likely to abandon tasks. They may or may not come back later.
+	
+- Load: deliver content and become interactive in under 5 seconds
+- Idle: Maximize idle time to increase the odds that the page responds to user input within 50 ms.
+	Use idle time to complete deferred work. For example, for the initial page load, load as little data as possible, then use idle time
+	to load the rest. Perform work during idle time in 50 ms or less. Any longer, and you risk interfering with the app's ability to
+	respond to user input within 50 ms. The user interaction should always take the highest priority and interrupt the idle time work.
+- Response: Complete a transition initiated by user input within 100 ms, so users feel like the interactions are instantaneous.
+	To ensure a visible response within 100 ms, process user input events within 50 ms (clicking buttons, toggling form controls, or starting animations)
+	This does not apply to touch drags or scrolls. You can use this 100 ms window to do other expensive work, but be careful not to block the user.
+	For actions that take longer than 50 ms to complete, always provide feedback.
+- Animation: Produce each frame in an animation in 10 ms or less.
+	Technically, the maximum budget for each frame is 16 ms (1000 ms / 60 frames per second ≈ 16 ms), but browsers need about 6 ms to render each frame,
+	hence the guideline of 10 ms per frame. Aim for visual smoothness. Users notice when frame rates vary.
+	do nothing where you can, and the absolute minimum where you can't. Whenever possible, make use of the 100 ms response to pre-calculate
+	expensive work so that you maximize your chances of hitting 60 fps.
+	
+FLIP
+is a mnemonic device and technique which stands for First, Last, Invert, Play.
+First: before anything happens, record the current (i.e., first) position and dimensions of the element that will transition.
+	You can use element.getBoundingClientRect() for this
+Last: execute the code that causes the transition to instantaneously happen, and record the final (i.e., last) position and dimensions of the element.*
+Invert: since the element is in the last position, we want to create the illusion that it's in the first position, by using transform to modify
+	its position and dimensions.
+Play: with the element inverted (and pretending to be in the first position), we can move it back to its last position by setting its transform to none.
+
+Optimizing JS for Animations : execute JS as early as possible every frame
+The window.requestAnimationFrame() method tells the browser that you wish to perform an animation and requests that the browser calls
+a specified function to update an animation before the next repaint. The method takes a callback as an argument to be invoked before the repaint.
+You can check JS runninig time in Timeline if you activate JS Profiler checkbox
+
+
+Cost of Style changes (computed style calculation) - performance costs linear with number of elements
+The first part of computing styles is to create a set of matching selectors, which is essentially the browser figuring out which classes,
+pseudo-selectors and IDs apply to any given element. The second part of the process involves taking all the style rules from the matching
+selectors and figuring out what final styles the element has. In Blink (Chrome and Opera's rendering engine) Roughly 50% of the time used
+to calculate the computed style for an element is used to match selectors, and the other half of the time is used for constructing the
+RenderStyle (computed style representation) from the matched rules.
+
+Reduce the complexity of your selectors; use a class-centric methodology like BEM(Block, Element, Modifier).
+Reduce the number of elements on which style calculation must be calculated.
+
+
+Layout Thrashing
+Avoid layout wherever possible - When you change styles the browser checks to see if any of the changes require layout to be calculated,
+and for that render tree to be updated. Use flexbox over older layout models.
+It is possible to force a browser to perform layout earlier with JavaScript. It is called a forced synchronous layout.
+e.g.: changee the styles of the box before you ask for its height. Read layout properties first then batch style changes.
+
+- Paint
+If you see that most time is spent painting, you need to take a closer look at why this is happening. To investigate your paints, use
+Show paint rectangles setting of the Web Inspector. You can check which part of the page is changing(painted) wiht Paint profiler
+(green flash on changed part)
+There are different reasons for Chrome to repaint areas of the page:
+	DOM nodes get changed in JavaScript, which causes Chrome to recalculate the layout of the page.
+	Animations are playing that get updated in a frame-based cycle.
+	User interaction, like hovering, causes style changes on certain elements.
+Solutions
+	try to change the page layout to reduce the amount of painting.
+	try to reduce the painting cost of the areas that get repainted. Not every CSS style has the same painting cost
+
+- Compositing
+Compositing is a technique to separate parts of a page into layers, rasterize them separately, and composite as a page in a separate
+thread called compositor thread. If scroll happens, since layers are already rasterized, all it has to do is to composite a new frame.
+Animation can be achieved in the same way by moving layers and composite a new frame.
+Once the layer tree is created and paint orders are determined, the main thread commits that information to the compositor thread.
+The compositor thread then rasterizes each layer. A layer could be large like the entire length of a page, so the compositor thread
+divides them into tiles and sends each tile off to raster threads. Raster threads rasterize each tile and store them in GPU memory.
+The compositor thread can prioritize different raster threads so that things within the viewport (or nearby) can be rastered first.
+
+Will-change
+CSS property hints to browsers how an element is expected to change. Browsers may set up optimizations before an element is actually changed.
+These kinds of optimizations can increase the responsiveness of a page by doing potentially expensive work before they are actually required.
+will-change: transform; / transform: translateZ(0)
+
+Optimizing steps
+1 checking forced layout refresh
+2 anything that is make visible change should be in happening inside a requestAnimationFrame
+3 use CSS transfor instead of JS
+
+
+---------------------------------------
+
+Why does speed matter?
+Performance plays a major role in the success of any online venture. High-performing sites engage and retain users better than low-performing ones.
+Retaining users is crucial to improving conversions. Slow sites have a negative impact on revenue, and fast sites are shown to increase conversion rates.
+
+Web Vitals
+is an initiative by Google to provide unified guidance for quality signals that are essential to delivering a great user experience on the web.
+Aspects:
+Largest Contentful Paint (LCP):
+	measures loading performance. LCP should occur within 2.5 seconds. it marks the point in the page load timeline when the page's main
+	content has likely loaded. Reports the render time of the largest image or text block visible within the viewport,
+	relative to when the page first started loading.
+First Input Delay (FID):
+	measures interactivity. FID measures the time from when a user first interacts with a page (i.e. when they click a link, tap on a button,
+	or use a custom, JavaScript-powered control) to the time when the browser is actually able to begin processing event handlers in response
+	to that interaction. should have a FID of less than 100 milliseconds.
+Cumulative Layout Shift (CLS):
+	measures visual stability. Should maintain a CLS of less than 0.1. CLS measures the sum total of all individual layout shift scores for
+	every unexpected layout shift that occurs during the entire lifespan of the page. A layout shift occurs any time a visible element
+	changes its position from one rendered frame to the next.
+	
+--------------------------------------
+
+Best Practices for Speeding Up Your Web Site
+https://web.dev/fast/
+Minimize HTTP Requests
+	Reducing the number of components in turn reduces the number of HTTP requests required to render the page. Combined CSS files, Image maps
+Use a Content Delivery Network
+	Deploying your content across multiple, geographically dispersed servers will make your pages load faster from the user's perspective.
+Add an Expires or a Cache-Control Header
+	For static components: implement "Never expire" policy by setting far future Expires header
+	For dynamic components: use an appropriate Cache-Control header to help the browser with conditional requests
+Gzip Components
+	Compression reduces response times by reducing the size of the HTTP response.
+Put Stylesheets at the Top
+	load a page progressively; that is, we want the browser to display whatever content it has as soon as possible.
+Put Scripts at the Bottom - ??????
+	use deferred scripts. The DEFER attribute indicates to browsers that they can continue rendering.
+Avoid CSS Expressions
+	they evaluated when the page is rendered and resized, but also when the page is scrolled and even when the user moves the mouse over the page.
+Make JavaScript and CSS External
+	Using external files in the real world generally produces faster pages because the JavaScript and CSS files are cached by the browser.
+Reduce DNS Lookups
+	Reducing the number of unique hostnames has the potential to reduce the amount of parallel downloading that takes place in the page.
+Minify JavaScript and CSS
+	When code is minified all comments are removed, as well as unneeded white space characters (space, newline, and tab).
+	Obfuscation is an alternative optimization that can be applied to source code
+Avoid Redirects
+	redirects slow down the user experience
+Remove Duplicate Scripts
+	duplicate scripts hurt performance by creating unnecessary HTTP requests. (same js file twice)
+Configure ETags
+	a mechanism that web servers and browsers use to determine whether the component in the browser's cache matches the one on the origin server.
+Make Ajax Cacheable
+	e.g: If the address book hasn't been modified, the timestamp will be the same and it can be read from cache eliminating an extra HTTP roundtrip.
+Use GET for AJAX Requests
+	POST is a two-step process: sending the headers first, then sending data. Use GET, which only takes one TCP packet to send.
+Post-load Components
+	What's absolutely required in order to render the page initially? The rest of the content and components can wait.
+Preload Components
+	By preloading components you can take advantage of the time the browser is idle and request components you'll need in the future.
+Reduce the Number of DOM Elements
+	A complex page means more bytes to download and it also means slower DOM access in JavaScript. Try to add event handler on 500 or 5000 elements.
+Split Components Across Domains
+	Splitting components allows you to maximize parallel downloads. Make sure you're using not more than 2-4 domains because of the DNS lookup penalty.
+Minimize the Number of iframes
+	Pros: third-party content, Security sandbox, Download scripts in parallel | Cons: Costly even if blank, Blocks page onload, Non-semantic
+Reduce Cookie Size
+	Eliminate unnecessary cookies
+	Keep cookie sizes as low as possible to minimize the impact on the user response time
+	Be mindful of setting cookies at the appropriate domain level so other sub-domains are not affected
+	Set an Expires date appropriately. An earlier Expires date or none removes the cookie sooner, improving the user response time
+Use Cookie-free Domains for Components
+	When the browser makes a request for a static image and sends cookies together with the request, the server doesn't have any use for those cookies.
+Develop Smart Event Handlers
+	attach only one event handler to the div wrapper, instead of one handler for each button. Events bubble
+Optimize Images
+Optimize CSS Sprites
+	Arranging the images in the sprite horizontally as opposed to vertically usually results in a smaller file size.
+	Combining similar colors in a sprite helps you keep the color count low, ideally under 256 colors so to fit in a PNG8
+Make favicon.ico Small and Cacheable
+	It's small, preferably under 1K.
+Avoid Empty Image src
+	
+-----------------------------------------
+
+Fast load times
+performance budget
+	is a set of limits imposed on metrics that affect site performance. It serves as a point of reference for making decisions about design,
+	technology, and adding features.
+	start by identifying the most important pages. Firstfocus on the timing milestones that best measure the user experience.
+	Check First Contentful Paint (FCP) and Time to Interactive (TTI). Users recognize a difference in response times when it's greater than 20%.
+	you can store budget limits in JSON file and use it with LightHouse audit (automation, CI, build process)
+Optimize your images
+	Do you really need that image? Can it be replaced with one of these?
+	- CSS effects (such as shadows or gradients) and CSS animations can be used to produce resolution-independent assets that always look sharp
+	at every resolution and zoom level
+	- Web fonts enable use of beautiful typefaces while preserving the ability to select, search, and resize text
+	Choose the right image format:
+	- Vector graphics use lines, points, and polygons to represent an image (logos, text, or icons.)
+	- Raster graphics represent an image by encoding the individual values of each pixel within a rectangular grid.
+	(PNG, JPEG, or WebP for photos). Serve responsive images.
+	Choose the correct level of compression (SVG compression tools, color palette)
+	Replace animated GIFs with video for faster page loads
+Lazy-load images and video
+	Lazy-loading is a technique that defers loading of non-critical resources at page load time. Instead, these non-critical resources are
+	loaded at the moment of need. it goes something like this:
+	- You arrive at a page, and begin to scroll as you read content.
+	- At some point, you scroll a placeholder image into the viewport.
+	- The placeholder image is suddenly replaced by the final image.
+	you can also lazy-load video (poster property for placeholder)
+	you can use the loading attribute:
+	- lazy: Defer loading of the resource until it reaches a calculated distance from the viewport.
+	- eager: Load the resource immediately, regardless of where it's located on the page.
+Optimize your JavaScript
+	Apply instant loading with the PRPL pattern:
+	- Preload the most important resources. Preload is a declarative fetch request that tells the browser to request a resource as soon as possible.
+	- Render the initial route as soon as possible. To improve First Paint, Lighthouse recommends inlining critical JavaScript and deferring
+		the rest using async.Another approach to improve First Paint is to server-side render the initial HTML of your page.
+	- Pre-cache remaining assets. By acting as a proxy, service workers can fetch assets directly from the cache rather than the server on repeat visits.
+	- Lazy load other routes and non-critical assets. Split the entire bundle and lazy load chunks on demand.
+	Analyze your bundle to detect unused code. Then remove unused and unneeded libraries.
+	Use Minification and Data compression
+	Serve modern code to modern browsers - Identify target browsers / Use @babel/preset-env with browser targets / Use <script type="module">
+	to stop sending transpiled code to browsers that don't need it.
+Optimize your resource delivery
+	Content delivery networks (CDNs) improve site performance by using a distributed network of servers to deliver resources to users.
+	Prioritize resources - influence default decision-making using <link rel="preload">, <link rel="preconnect">, and <link rel="prefetch">
+	Fast playback with audio and video preload: Setting the preload attribute to metadata indicates that the user is not expected to need the video,
+	but that fetching its metadata (dimensions, track list, duration, and so on) is desirable.
+	Smart loading based on network information. Preload the first segment.
+Optimize your CSS
+	Defer non-critical CSS. Measure with LightHouse and separate critical classes for the first render Then, load the rest of the classes asynchronously
+	Use Minification / Optimize CSS background images with media queries (send images that are only as large as they need to be)
+Optimize WebFonts
+	Avoid invisible text during font loading:
+		- Use font-display: swap tells the browser that text using this font should be displayed immediately using a system font.
+			Once the custom font is ready, the system font is swapped out.
+		- Wait to use custom fonts until they are loaded. Don't use a custom font on initial page load. Detect when your custom font is loaded.
+	Optimize WebFont loading and rendering:
+		- use <link rel="preload">, font-display, or the Font Loading API
+		- Specify revalidation and optimal caching policies: fonts are static resources
+	Reduce WebFont Size
+		- Audit and monitor your font use: don't use too many fonts on your pages, and, for each font, minimize the number of used variants.
+		- Subset your font resources: many fonts can be subset, or split into multiple unicode-ranges to deliver just the glyphs that requires.
+		- Deliver optimized font formats to each browser: provide each font in WOFF 2.0, WOFF, EOT, and TTF formats.
+		  Make sure to apply GZIP compression to the EOT and TTF formats, because they are not compressed by default.
+		- Give precedence to local() in your src list: listing local('Font Name') first in your src list ensures that HTTP requests
+		  aren't made for fonts that are already installed.
+Optimize for network quality
+	Switch between serving high-definition and low-definition content based on the user's network.
+	Decide whether to preload resources.
+	Defer uploads and downloads when users are on a slow connection.
+	Enable offline mode if the network quality is not good enough to load the app and use the features.
+	Warn users that doing something (for example, watching video) over cellular could cost them money.
+What should you measure to improve performance
+	Discovery - Optimizing for discovery means optimizing for the first load, which is what new users will get, but also search and social crawlers
+	Engagement And Conversion - important to have fast and responsive navigations and interactions
+	Re-Engagement - Make sure to optimize for fast repeat loads and smooth UX flows to increase chances of reengagement.
+Build a performance culture
+	Introduce detailed report to stakeholders. Discuss changes with marketing and web-design team
+	Use A/B tests
+	
+-----------------------------------------
+
+Web Accessibility
+https://webaim.org/standards/wcag/checklist
+https://www.w3.org/WAI/WCAG21/quickref/?versions=2.0
+
+Accessibility is the practice of making your websites usable by as many people as possible. We traditionally think of this as being about people
+with disabilities, but the practice of making sites accessible also benefits other groups such as those using mobile devices, or those with
+slow network connections.
+
+benefit everyone:
+Semantic HTML, which improves accessibility, also improves SEO, making your site more findable.
+Caring about accessibility demonstrates good ethics and morals, which improves your public image.
+Providing accessible sites is part of the law in some countries
+
+People with visual impairments
+Many people with visual impairments use screen magnifiers that are either physical magnifiers or software zoom capabilities.
+Most browsers and operating systems these days have zoom capabilities. Some users will rely on screen readers
+
+People with hearing impairments
+There are specific techniques for providing textual alternatives to audio content (transcripts, captions).
+
+People with mobility impairments
+Some people might have difficulty making the exact hand movements required to use a mouse, while others might be more severely affected,
+perhaps being significantly paralyzed to the point where they need to use a head pointer to interact with computers.
+
+People with cognitive impairments
+difficulty with understanding content, remembering how to complete tasks, and confusion caused by inconsistent webpage layouts
+A good foundation of accessibility for people with cognitive impairments includes:
+Delivering content in more than one way, such as by text-to-speech or by video.
+Easily understood content, such as text written using plain-language standards.
+Focusing attention on important content.
+Minimizing distractions, such as unnecessary content or advertisements.
+Consistent webpage layout and navigation.
+Familiar elements, such as underlined links blue when not visited and purple when visited.
+Dividing processes into logical, essential steps with progress indicators.
+Website authentication as easy as possible without compromising security.
+Making forms easy to complete, such as with clear error messages and simple error recovery.
+
+HTML
+semantic markup benefits:
+Easier to develop with — as mentioned above, you get some functionality for free, plus it is arguably easier to understand.
+Better on mobile — semantic HTML is arguably lighter in file size than non-semantic spaghetti code, and easier to make responsive.
+Good for SEO — search engines give more importance to keywords inside headings, links, etc. than keywords included in non-semantic
+<div>s, etc., so your documents will be more findable by customers.
+
+Text content
+One of the best accessibility aids a screen reader user can have is an excellent content structure with headings, paragraphs, lists, etc.
+
+Using clear language
+You should use clear language that is not overly complex and doesn't use unnecessary jargon or slang terms.
+
+Page layouts
+UI controls
+Meaningful text labels
+Accessible data tables
+Text alternatives
+
+WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications)
+is a specification written by the W3C, defining a set of additional HTML attributes that can be applied to elements to provide additional
+semantics and improve accessibility wherever it is lacking. There are three main features defined in the spec:
+
+Roles — These define what an element is or does. Many of these are so-called landmark roles, which largely duplicate the semantic value of
+	HTML5 structural elements e.g. role="navigation" (<nav>) or role="complementary" (<aside>), but there are also others that describe
+	different pages structures, such as role="banner", role="search", role="tabgroup", role="tab", etc., which are commonly found in UIs.
+Properties — These define properties of elements, which can be used to give them extra meaning or semantics. As an example,
+	aria-required="true" specifies that a form input needs to be filled in order to be valid, whereas aria-labelledby="label" allows you
+	to put an ID on an element, then reference it as being the label for anything else on the page, including multiple elements, which is
+	not possible using <label for="input">. As an example, you could use aria-labelledby to specify that a key description contained in
+	a <div> is the label for multiple table cells, or you could use it as an alternative to image alt text — specify existing information
+	on the page as an image's alt text, rather than having to repeat it inside the alt attribute. You can see an example of this at Text alternatives.
+States — Special properties that define the current conditions of elements, such as aria-disabled="true", which specifies to a screenreader
+	that a form input is currently disabled. States differ from properties in that properties don't change throughout the lifecycle of an app,
+	whereas states can change, generally programmatically via JavaScript.
+	
+Practical WAI-ARIA implementations
+Landmarks / Dynamic content updates (polite-assertive) / Enhancing keyboard accessibility (tabindex)
+
+Accessible multimedia
+Simple images / Creating custom audio and video controls / Audio transcripts / Video text tracks
+
+Mobile accessibility
+Responsive design
+
+Web Content Accessibility Guidelines (WCAG) 2 requirements
+1 – Perceivable
+Web content is made available to the senses - sight, hearing, and/or touch.
+Information and user interface components must be presentable to users in ways they can perceive.
+Text Alternatives:
+	Provide text alternatives for any non-text content so that it can be changed into other forms people need,
+	such as large print, braille, speech, symbols or simpler language.
+Time-based Media
+	offer transcript or captions (live), sign language, media alternatives
+Adaptable
+	Create content that can be presented in different ways (for example simpler layout) without losing information or structure.
+Distinguishable
+	Make it easier for users to see and hear content including separating foreground from background. Like color, contrast, resize text
+	
+2 – Operable
+Keyboard Accessible
+	Make all functionality available from a keyboard.
+	No Keyboard Trap
+Enough Time
+	Provide users enough time to read and use content. Pause, Stop, Hide for moving, blinking, scrolling, or auto-updating information
+Seizures and Physical Reactions
+	Do not design content in a way that is known to cause seizures or physical reactions. No flashes
+Navigable
+	Provide ways to help users navigate, find content, and determine where they are. Page Titled, Focus order, Heading and labels
+	
+3 – Understandable
+Readable
+	Make text content readable and understandable. Language of Page, unusual words
+Predictable
+	Make Web pages appear and operate in predictable ways.
+Input Assistance
+	Help users avoid and correct mistakes. Error Identification, Labels or Instructions
+	
+4 – Robust
+Compatible
+	Maximize compatibility with current and future user agents, including assistive technologies. Parsing, Name, Role, Value for elements

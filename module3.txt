@@ -71,6 +71,8 @@ Challenges
 Image resizing
 Third party content / wrap it into iframe
 
+-------------------------------------------------
+
 RESS
 where to place logic
 feature detection (client side) / eg. is touch supported?
@@ -100,277 +102,23 @@ responsive images
 https://web.dev/optimize-cls/
 http://responsiveimages.org/
 
+-------------------------------------------------------
 
-------------------------------------------------
-
-LocalStorage vs sessionStorage
-the data survives a page refresh (for sessionStorage) and even a full browser restart (for localStorage).
-
-- The data is saved locally only and can't be read by the server, which eliminates the security issue that cookies present.
-- It allows for much more data to be saved (10Mb for most browsers).
-- The storage is bound to the origin (domain/protocol/port triplet). That is, different protocols or sub-domains
-	infer different storage objects, they can't access data from each other.
-
-Both the storage objects provide same methods and properties:
-	setItem(key, value) – store item as key/value pair.
-	getItem(key) – get item's value by key.
-	removeItem(key) – remove item using key.
-	clear() – clear or delete everything.
-	key(index) – get the Item key based on index.
-	length – returns total number of stored items.
-	
-localStorage
-Main features:
-	Data is shared between all tabs and windows from the same origin.
-	The data will not expire. It will remain even after browser restart and survive OS reboot too.
-	
-sessionStorage
-it's functionality is much more limited:
-	The sessionStorage exists only within the current browser tab. Another tab with the same page will have a different session storage.
-	However it is shared between iframes in the same tab (assuming they come from the same origin).
-	The data survives page refresh, but not closing/opening the tab.
-	
-Storage Event
-Storage event triggers(with properties), whenever there is any updates in the data in localStorage or sessionStorage.
-key / oldValue / newValue / URL / storageArea (where the update happened
-The important thing to note is: the event triggers on all -window- objects where the storage is accessible, except the one that caused it.
-
-Web storage objects localStorage and sessionStorage allows us to store key/value in the browser.
-	Both key and value must be strings.
-	The limit is 2mb+, it depends on the browser.
-	They do not expire.
-	The data is bound to the origin (domain/port/protocol).
-	
-	
--------------------------------------------------------------
-
-HTTP cookies
-An HTTP cookie (web cookie, browser cookie) is a small piece of data that a server sends to the user's web browser.
-The browser may store it and send it back with later requests to the same server. Typically, it's used to tell if two
-requests came from the same browser — keeping a user logged-in, for example.
-
-Cookies are mainly used for three purposes:
-- Session management
-	Logins, shopping carts, game scores, or anything else the server should remember
-- Personalization
-	User preferences, themes, and other settings
-- Tracking
-	Recording and analyzing user behavior
-	
-Creating cookies
-After receiving an HTTP request, a server can send one or more Set-Cookie headers with the response.
-The cookie is usually stored by the browser, and then the cookie is sent with requests made to the same server inside a Cookie HTTP header.
-
-The Set-Cookie HTTP response header sends cookies from the server to the user agent. Eg.: Set-Cookie: <cookie-name>=<cookie-value>
-
-The lifetime of a cookie can be defined in two ways:
-	- Session cookies are deleted when the current session ends. The browser defines when the "current session" ends,
-		and some browsers use session restoring when restarting, which can cause session cookies to last indefinitely long.
-	- Permanent cookies are deleted at a date specified by the Expires attribute, or after a period of time specified by the Max-Age attribute.
-
-The Domain and Path attributes define the scope of the cookie: what URLs the cookies should be sent to.
-
-Domain attribute
-The Domain attribute specifies which hosts are allowed to receive the cookie. If unspecified, it defaults to the same host that set the cookie,
-excluding subdomains. If Domain is specified, then subdomains are always included. Therefore, specifying Domain is less restrictive than omitting it.
-However, it can be helpful when subdomains need to share information about a user.
-For example, if Domain=mozilla.org is set, then cookies are available on subdomains like developer.mozilla.org.
-
-Path attribute
-The Path attribute indicates a URL path that must exist in the requested URL in order to send the Cookie header.
-The %x2F ("/") character is considered a directory separator, and subdirectories match as well.
-
-SameSite attribute
-The SameSite attribute lets servers specify whether/when cookies are sent with cross-origin requests (where Site is defined by
-the registrable domain), which provides some protection against cross-site request forgery attacks (CSRF).
-
-It takes three possible values: Strict, Lax, and None.
-	- With Strict, the cookie is sent only to the same site as the one that originated it;
-	- Lax is similar, except that cookies are sent when the user navigates to the cookie's origin site,
-	eg by following a link from an external site;
-	- None specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts
-	(i.e. if SameSite=None then the Secure attribute must also be set). If no SameSite attribute is set then the cookie is treated as Lax.
-	
-A cookie with the Secure attribute is sent to the server only with an encrypted request over the HTTPS protocol.
-it can be read and modified by someone with access to the client's hard disk (or JavaScript if the HttpOnly attribute is not set)
-
-A cookie with the HttpOnly attribute is inaccessible to the JavaScript Document.cookie API; it is sent only to the server.
-This precaution helps mitigate cross-site scripting (XSS) attacks.
-
-Cookie prefixes
-__Host-
-	If a cookie name has this prefix, it is accepted in a Set-Cookie header only if it is also marked with the Secure attribute,
-	was sent from a secure origin, does not include a Domain attribute, and has the Path attribute set to /. In this way,
-	these cookies can be seen as "domain-locked".
-
-__Secure-
-	If a cookie name has this prefix, it is accepted in a Set-Cookie header only if it is marked with the Secure attribute and
-	was sent from a secure origin. This is weaker than the __Host- prefix.
-	
-Cookie-related regulations
-Legislation or regulations that cover the use of cookies include:
-	- The General Data Privacy Regulation (GDPR) in the European Union
-	- The ePrivacy Directive in the EU
-	- The California Consumer Privacy Act
-
-These regulations have global reach, because they apply to any site on the World Wide Web that is accessed by users from
-these jurisdictions (the EU and California, with the caveat that California's law applies only to entities with gross revenue over 25 million USD,
-among other things.)
-
-These regulations include requirements such as:
-	- Notifying users that your site uses cookies.
-	- Allowing users to opt out of receiving some or all cookies.
-	- Allowing users to use the bulk of your service without receiving cookies.
-	
-Man-in-the-middle attacks
-https://www.youtube.com/watch?v=8OR2dDIaIDw
-A man-in-the-middle (MitM) attack describes a broad category of attacks where an attacker sits between a client and a server and
-intercepts the data going between the two.
-As a developer, you can greatly reduce the chance of a MitM attack by ensuring that you enable HTTPS on your server,
-use an SSL certificate from a trusted certificate authority, and ensure your code uses HTTPS instead of the insecure HTTP.
-In terms of cookies, you should add the Secure attribute to your cookies so they can only be sent over a secure HTTPS connection
-
-XSS attacks
-https://www.youtube.com/watch?v=EoaDgUgS6QA
-An XSS (cross-site scripting) attack describes a category of attacks when a bad actor injects unintended, potentially dangerous code into a website.
-These attacks are very problematic because they could affect every person that visits the site.
-In terms of cookies, if a bad actor pulls off a successful XSS attack on a site, they could gain access to session cookies and
-access the site as another signed in user.
-As a developer, you'll want to ensure that your server enforces the Same Origin Policy, and that any
-input you receive from people is properly sanitized.
-
-
-------------------------------------------------------------------
-
-Web Workers
-Web Workers are a simple means for web content to run scripts in background threads. The worker thread can perform tasks
-without interfering with the user interface. In addition, they can perform I/O using XMLHttpRequest (although the responseXML and
-channel attributes are always null) or fetch (with no such restrictions). Once created, a worker can send messages to the
-JavaScript code that created it by posting messages to an event handler specified by that code (and vice versa).
-
-Web Workers API
-Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application.
-The advantage of this is that laborious processing can be performed in a separate thread, allowing the main (usually the UI) thread
-to run without being blocked/slowed down.
-
-Worker types
-- Dedicated workers are workers that are utilized by a single script. This context is represented by either a DedicatedWorkerGlobalScope object.
-
-- Shared workers are workers that can be utilized by multiple scripts running in different windows, IFrames, etc.,
-	as long as they are in the same domain as the worker. They are a little more complex than dedicated workers — scripts must communicate via an active port.
-
-- Service Workers essentially act as proxy servers that sit between web applications, the browser, and the network (when available).
-	They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take
-	appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to
-	push notifications and background sync APIs.
-
-- Chrome Workers are a Firefox-only type of worker that you can use if you are developing add-ons and want to use workers in extensions and
-	have access to js-ctypes in your worker. See ChromeWorker for more details.
-	
-Supported Web APIs
-Barcode Detection API, CustomEvent, Fetch API, FileReader, Network Information API, Performance API, Promise,
-URL API (e.g. URL), WebGL with OffscreenCanvas,  WebSocket, XMLHttpRequest.
-
-
--------------------------------------------------------------
-
-Offline web applications
-Users of typical online Web applications are only able to use the applications while they have a connection to the Internet.
-The HTML 5 specification provides two solutions to this: a SQL-based database API for storing data locally,
-and an offline application HTTP cache for ensuring applications are available even when the user is not connected to their network.
-
-SQL
-The client-side SQL database in HTML 5 enables structured data storage.
-The API to interact with this database is asynchronous which ensures that the user interface doesn't lock up.
-
-Offline Application Caching APIs
-The attribute takes a URI to a manifest, which specifies which files are to be cached. provides a way for scripts to add and remove
-entries from the cache dynamically, and a way for applications to atomically update their cache to new files, optionally presenting
-custom UI during the update.
-
------------------------------------------------------------------
-
- Geolocation API
- allows the user to provide their location to web applications if they so desire. For privacy reasons,
- the user is asked for permission to report location information.
- 
-----------------------------------------------------------------
- 
-INPUT TYPES
-<input type="search"> for search boxes
-<input type="number"> for spinboxes
-<input type="range"> for sliders
-<input type="color"> for color pickers
-<input type="tel"> for telephone numbers
-<input type="url"> for web addresses
-<input type="email"> for email addresses
-<input type="date"> for calendar date pickers
-<input type="month"> for months
-<input type="week"> for weeks
-<input type="time"> for timestamps
-<input type="datetime"> for precise, absolute date+time stamps
-<input type="datetime-local"> for local dates and times
-
-------------------------------------------------------------------
-
-Placeholder text / Form autofocus / Microdata (machine-readable labels - groups of name-value pairs known as items) /
-History API (standardized way to manipulate the browser history via script)
-
-------------------------------------------------------------------
-
-NEW SEMANTIC ELEMENTS IN HTML5
-
-<section>
-	The section element represents a generic document or application section. A section, in this context, is a thematic grouping of content,
-	typically with a heading. Examples of sections would be chapters, the tabbed pages in a tabbed dialog box, or the numbered sections
-	of a thesis. A Web site's home page could be split into sections for an introduction, news items, contact information.
-
-<nav>
-	The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
-	Not all groups of links on a page need to be in a nav element — only sections that consist of major navigation blocks are appropriate
-	for the nav element. In particular, it is common for footers to have a short list of links to common pages of a site, such as the terms of service, the home page, and a copyright page. The footer element alone is sufficient for such cases, without a nav element.
-
-<article>
-	The article element represents a component of a page that consists of a self-contained composition in a document, page, application,
-	or site and that is intended to be independently distributable or reusable, e.g. in syndication. This could be a forum post,
-	a magazine or newspaper article, a Web log entry, a user-submitted comment, an interactive widget or gadget, or any other
-	independent item of content.
-
-<aside>
-	The aside element represents a section of a page that consists of content that is tangentially related to the content around
-	the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars
-	in printed typography. The element can be used for typographical effects like pull quotes or sidebars, for advertising,
-	for groups of nav elements, and for other content that is considered separate from the main content of the page.
-
-<hgroup>
-	The hgroup element represents the heading of a section. The element is used to group a set of h1–h6 elements when the heading
-	has multiple levels, such as subheadings, alternative titles, or taglines.
-
-<header>
-	The header element represents a group of introductory or navigational aids. A header element is intended to usually contain
-	the section’s heading (an h1–h6 element or an hgroup element), but this is not required. The header element can also be used to wrap a section’s table of contents, a search form, or any relevant logos.
-
-<footer>
-	The footer element represents a footer for its nearest ancestor sectioning content or sectioning root element. A footer typically
-	contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
-	Footers don’t necessarily have to appear at the end of a section, though they usually do. When the footer element contains
-	entire sections, they represent appendices, indexes, long colophons, verbose license agreements, and other such content.
-
-<time>
-	The time element represents either a time on a 24 hour clock, or a precise date in the proleptic Gregorian calendar,
-	optionally with a time and a time-zone offset.
-
-<mark>
-	The mark element represents a run of text in one document marked or highlighted for reference purposes.
-	
-	
-All browsers render unknown elements inline, i.e. as if they had a display:inline CSS rule.
-
-------------------------------------------------------
-
-Canvas
-HTML 5 defines the <canvas> element as "a resolution-dependent bitmap canvas which can be used for rendering graphs, game graphics,
-or other visual images on the fly." A canvas is a rectangle in your page where you can use JavaScript to draw anything you want.
+Cross-browser and mobile development
+Check used JS against compatibility table to be sure everyone can use it
+- Graceful degradation is the practice of building your web functionality so that it provides a certain level of user experience in more
+	modern browsers, but it will also degrade gracefully to a lower level of user in experience in older browsers. This lower level is not
+	as nice to use for your site visitors, but it does still provide them with the basic functionality that they came to your site to use;
+	things do not break for them. (retrofit, <noscript>)
+- Progressive enhancement is similar, but it does things the other way round. You start by establishing a basic level of user experience
+	that all browsers will be able to provide when rendering your web site, but you also build in more advanced functionality that will
+	automatically be available to browsers that can use it.
+- Use polyfills to offer same features as moderns JS
+CSS
+	use preprocessors to handle different browsers automatically
+	use reset/modernizer css
+Page
+	check your page with browserstack to see the result
 
 
 -------------------------------------------------------
@@ -454,3 +202,82 @@ How do you inform the user of the above?
 
 Inform the user of both the actions they can still take when they have a network failure and the current state of the application.
 Provide an offline experience by default
+
+
+------------------------------------------------
+
+INPUT TYPES
+<input type="search"> for search boxes
+<input type="number"> for spinboxes
+<input type="range"> for sliders
+<input type="color"> for color pickers
+<input type="tel"> for telephone numbers
+<input type="url"> for web addresses
+<input type="email"> for email addresses
+<input type="date"> for calendar date pickers
+<input type="month"> for months
+<input type="week"> for weeks
+<input type="time"> for timestamps
+<input type="datetime"> for precise, absolute date+time stamps
+<input type="datetime-local"> for local dates and times
+
+------------------------------------------------------------------
+
+Placeholder text / Form autofocus / Microdata (machine-readable labels - groups of name-value pairs known as items) /
+History API (standardized way to manipulate the browser history via script)
+
+------------------------------------------------------------------
+
+NEW SEMANTIC ELEMENTS IN HTML5
+
+<section>
+	The section element represents a generic document or application section. A section, in this context, is a thematic grouping of content,
+	typically with a heading. Examples of sections would be chapters, the tabbed pages in a tabbed dialog box, or the numbered sections
+	of a thesis. A Web site's home page could be split into sections for an introduction, news items, contact information.
+
+<nav>
+	The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
+	Not all groups of links on a page need to be in a nav element — only sections that consist of major navigation blocks are appropriate
+	for the nav element. In particular, it is common for footers to have a short list of links to common pages of a site, such as the terms of service, the home page, and a copyright page. The footer element alone is sufficient for such cases, without a nav element.
+
+<article>
+	The article element represents a component of a page that consists of a self-contained composition in a document, page, application,
+	or site and that is intended to be independently distributable or reusable, e.g. in syndication. This could be a forum post,
+	a magazine or newspaper article, a Web log entry, a user-submitted comment, an interactive widget or gadget, or any other
+	independent item of content.
+
+<aside>
+	The aside element represents a section of a page that consists of content that is tangentially related to the content around
+	the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars
+	in printed typography. The element can be used for typographical effects like pull quotes or sidebars, for advertising,
+	for groups of nav elements, and for other content that is considered separate from the main content of the page.
+
+<hgroup>
+	The hgroup element represents the heading of a section. The element is used to group a set of h1–h6 elements when the heading
+	has multiple levels, such as subheadings, alternative titles, or taglines.
+
+<header>
+	The header element represents a group of introductory or navigational aids. A header element is intended to usually contain
+	the section’s heading (an h1–h6 element or an hgroup element), but this is not required. The header element can also be used to wrap a section’s table of contents, a search form, or any relevant logos.
+
+<footer>
+	The footer element represents a footer for its nearest ancestor sectioning content or sectioning root element. A footer typically
+	contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
+	Footers don’t necessarily have to appear at the end of a section, though they usually do. When the footer element contains
+	entire sections, they represent appendices, indexes, long colophons, verbose license agreements, and other such content.
+
+<time>
+	The time element represents either a time on a 24 hour clock, or a precise date in the proleptic Gregorian calendar,
+	optionally with a time and a time-zone offset.
+
+<mark>
+	The mark element represents a run of text in one document marked or highlighted for reference purposes.
+	
+	
+All browsers render unknown elements inline, i.e. as if they had a display:inline CSS rule.
+
+------------------------------------------------------
+
+Canvas
+HTML 5 defines the <canvas> element as "a resolution-dependent bitmap canvas which can be used for rendering graphs, game graphics,
+or other visual images on the fly." A canvas is a rectangle in your page where you can use JavaScript to draw anything you want.
