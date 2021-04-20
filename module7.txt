@@ -1,0 +1,121 @@
+BEM
+
+
+
+The Block, Element, Modifier methodology is a popular naming convention for classes in HTML and CSS. Developed by the team at Yandex,
+its goal is to help developers better understand the relationship between the HTML and CSS in a given project.
+
+The naming convention follows this pattern:
+
+.block {} - represents the higher level of an abstraction or component.
+.block__element {} - represents a descendent of .block that helps form .block as a whole.
+.block--modifier {} - represents a different state or version of .block.
+
+Block is a top-level abstraction of a new component, for example a button: .btn { }. This block should be thought of as a parent.
+Child items, or elements, can be placed inside and these are denoted by two underscores following the name of the block like .btn__price { }.
+Modifiers can manipulate the block so that we can theme or style that particular component without inflicting changes on a completely unrelated module.
+This is done by appending two hyphens to the name of the block just like btn--orange.
+
+Why should we consider BEM?
+- If we want to make a new style of a component, we can easily see which modifiers and children already exist.
+- able to quickly get an idea of which element depends on another
+- consistent name components for easier communication between team members.
+
+Sass and BEM
+you can still author in a nested format, but get CSS that isn't nested, with @at-root:
+
+Note
+Never overriding modifiers in an unrelated block.
+Avoiding making unnecessary parent elements when the child can exist quite happily by itself.
+One of the hardest parts of BEM is deciding when to start and stop scope, and when (or not) to use it.
+
+-------------------------------------------
+
+https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss/
+https://www.hongkiat.com/blog/basics-of-object-oriented-css/
+Object-Oriented CSS
+Main Principles of OOCSS
+- Separate structure and skin
+	This means to define repeating visual features (like background and border styles) as separate “skins” that you can mix-and-match with your
+	various objects to achieve a large amount of visual variety without much code.
+- Separate container and content
+	Essentially, this means “rarely use location-dependent styles”. An object should look the same no matter where you put it. So instead of
+	styling a specific <h2> with .myObject h2 {...}, create and apply a class that describes the <h2> in question, like <h2 class="category">.
+	
+Benefits
+- Faster: fewer repeated styles will lead to smaller file sizes and thus faster downloading.
+- MAINTAINABLE STYLESHEETS
+
+CSS object may consist of four things:
+HTML node(s) of the DOM
+CSS declarations about the style of those nodes
+Components like background images
+JavaScript behaviors, listeners, or methods associated with an object
+
+Generally speaking, CSS is object-oriented when it considers classes that are reuseable and targetable to multiple page elements.
+
+Guidelines
+Work with classes instead of IDs for styling.
+Try to abstain from multi-level descendant class specificity unless needed.
+Define unique styles with repeatable classes (eg floats, clearfix, unique font stacks).
+Extend elements with targeted classes rather than parent classes.
+Organize your stylesheet into sections, consider adding a table of contents.
+
+-------------------------------------------
+
+https://swapps.com/blog/what-is-smacss-and-how-to-use-it/
+Smacss (Scalable and Modular Architecture for CSS)
+SMACSS is a way to examine your design process and to fit those rigid frameworks into a flexible thought process.
+Style guide that follows five simple categories:
+	- Base: are the defaults values. They are like the padding, margin, border, font and other properties, this values are used on the
+	entire web site and all elements.
+	- Layout: divides a page into sections with elements like header, footer, main page, etc. Layouts hold one or more modules together.
+	Often developers show layout elements by prefixing the class with l-, e.g. l-header, l-footer.
+	- Modules: are the reusable, modular parts of our design like navbar, sidebar and some elements that are repeated in the site.
+	- State: are ways to describe how our modules or layouts will look when they are into a particular state (e.g. active, inactive, expanded, hidden).
+	These are prefixed with is-, e.g. is-active, is-inactive, is-expanded, is-hidden.
+	- Theme: Theme rules are similar to state rules in that they describe how modules or layouts might look. It is more applicable for larger
+	sites with shared elements that look different throughout.
+
+
+---------------------------------------------
+
+https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+ITCSS - Inverted Triangle CSS: Scalable and Maintainable CSS Architecture
+separates your CSS codebase to several sections/layers
+Settings – used with preprocessors and contain font, colors definitions, etc.
+Tools – globally used mixins and functions. It's important not to output any CSS in the first 2 layers.
+Generic – reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
+Elements – styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+Objects – class-based selectors which define undecorated design patterns, for example media object known from OOCSS
+Components – specific UI components. UI components are often composed of Objects and Components
+Utilities – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+
+Triangle shows how styles represented by selectors are ordered in the resulting CSS: from generic styles to explicit ones,
+from low-specificity selectors to more specific ones
+
+
+-------------------------------------------------
+
+Atomic CSS
+
+-------------------------------------------------
+
+webpack
+webpack is a static module bundler
+
+can do:
+Detect the code you don't use to exclude it while combining files
+Serialize the code and load it only when it's necessary
+Monitor file alterations
+Transpile code to ES5 (thanks to Babel plugins for webpack)
+Start a web server
+
+webpack is also able to use provide hot module reloading, which gives you an opportunity to re-render your app in a browser faster.
+
+Entry point indicates which module webpack should use to begin building out its internal dependency graph.
+Output property tells webpack where to emit the bundles it creates and how to name these files.
+Loaders allow webpack to process other types of files and convert them into valid modules
+Plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
+Mode parameter can be set to either development, production or none, so it can correspond to each environment.
+Browser Compatibility - webpack supports all browsers that are ES5-compliant
