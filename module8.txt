@@ -1,0 +1,41 @@
+Common misconceptions of TDD
+1. TDD is too Time Consuming. The Business Team Would Never Approve
+	Without tests, many more bugs get past the development phase, and every bug that gets into production hurts the company’s brand and quality reputation.
+	It wastes enormous resources in customer support costs.
+2. You Can’t Write Tests Until You Know the Design, & You Can’t Know the Design Until You Implement the Code
+	writing tests first is more effective than adding tests later.
+3. You Have to Write All Tests Before You Start the Code
+	Write one test / Watch it fail / Implement the code / Watch the test pass / Repeat
+4. Red, Green, and ALWAYS Refactor?
+	benefits of TDD is that it can help you refactor when you need to
+5. Everything Needs Unit Tests
+	Unit tests work best for pure functions — functions which:
+	- Given the same input, always return the same output
+	- Have no side-effects (don’t mutate shared state, save data, talk to the network, draw things to screen, log to the console, etc…)
+	
+----------------------------------------
+
+5 Questions Every Unit Test Must Answer
+Unit tests combine many features that make them your secret weapon to application success:
+Design aid: Writing tests first gives you a clearer perspective on the ideal API design.
+Feature documentation (for developers): Test descriptions enshrine in code every implemented feature requirement.
+Test your developer understanding: Does the developer understand the problem enough to articulate in code all critical component requirements?
+Quality Assurance: It’s impossible for a developer to remember all features that need testing after making a change to refactor, add/remove features.
+Continuous Delivery Aid: Automated QA affords the opportunity to automatically prevent broken builds from being deployed to production.
+
+----------------------------------------
+
+TDD
+Challenges
+- Incremental development / Progress feature by feature, Vertical slice
+- Iterative development / Refine implementation until it's good enough
+- Constant testing / Verifies new features, Catches regression errors
+- Simple code / Easier to understand and modify, Refactor
+
+Integration test
+- verifies our code works with code we cannot change
+- check if the components working together
+
+Unit test
+- internal quality
+

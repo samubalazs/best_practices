@@ -98,6 +98,26 @@ from low-specificity selectors to more specific ones
 -------------------------------------------------
 
 Atomic CSS
+Atomic CSS is the approach to CSS architecture that favors small, single-purpose classes with names based on visual function
+The Programmatic approach to Atomic CSS involves using a build tool to automatically generate styles based on what it finds in the HTML.
+
+For example, given this:
+<!-- Programmatic Atomic CSS Example -->
+<div class="Bgc(#0280ae) C(#fff) P(20px)">Lorem ipsum</div>
+
+The following CSS would be generated:
+.Bgc\(#0280ae\) { background-color: #0280ae; }
+.C\(#fff\) { color: #fff; }
+.P\(20px\) { padding: 20px; }
+
+Longhand/Shorthand readable names
+.bg-blue { background-color: #357edd; } and .background-blue  { background-color: #357edd; }
+
+Immutable CSS
+.black {color:navy;}
+
+Breakpoint Prefixing
+.m-grid-6  /* 2 column at medium screen sizes */
 
 -------------------------------------------------
 
