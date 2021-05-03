@@ -1,0 +1,418 @@
+https://github.com/sudheerj/reactjs-interview-questions
+What is React?
+- React is a front-end JavaScript library developed by Facebook in 2011.
+- It follows the component based approach which helps in building reusable UI components.
+- It is used for developing complex and interactive web and mobile UI.
+- Even though it was open-sourced only in 2015, it has one of the largest communities supporting it.
+
+-------------------------------
+
+What are the features of React?
+JSX:  JSX is a syntax extension to JavaScript. It is used with React to describe what the user interface should look like. By using JSX, we can write HTML structures in the same file that contains JavaScript code.
+Components: Components are the building blocks of any React application, and a single app usually consists of multiple components. It splits the user interface into independent, reusable parts that can be processed separately.
+Virtual DOM: React keeps a lightweight representation of the real DOM in the memory, and that is known as the virtual DOM. When the state of an object changes, virtual DOM changes only that object in the real DOM, rather than updating all the objects.
+One-way data-binding: React's one-way data binding keeps everything modular and fast. A unidirectional data flow means that when designing a React app, you often nest child components within parent components.
+High performance: React updates only those components that have changed, rather than updating all the components at once. This results in much faster web applications.
+
+-------------------------------
+
+What are the limitations of React?
+- React is just a library, not a full-blown framework
+- Its library is very large and takes time to understand
+- It can be little difficult for the novice programmers to understand
+- Coding gets complex as it uses inline templating and JSX
+
+-------------------------------
+
+What is JSX?
+JSX is a XML-like syntax extension to ECMAScript. JSX provides syntactic sugar for React.createElement( ) function.
+
+-------------------------------
+
+What are the differences between functional and class components?
+Before the introduction of Hooks in React, functional components were called stateless components and were behind class components on feature basis. After the introduction of Hooks, functional components are equivalent to class components.
+
+Decalaration
+- Functional components are nothing but JavaScript functions and therefore can be declared using an arrow function or the function keyword:
+	function card(props){
+	 return(
+	   <div className="main-container">
+		 <h2>Title of the card</h2>
+	   </div>
+	 )
+	}
+- Class components on the other hand, are declared using the ES6 class:
+	class Card extends React.Component{
+	 constructor(props){
+	   super(props);
+	 }
+
+	 render(){
+	   return(
+		 <div className="main-container">
+		   <h2>Title of the card</h2>
+		 </div>
+	   )
+	 }
+	}
+	
+Handling props
+- Any prop provided as an argument to a functional component, can be directly used inside HTML elements:
+	function StudentInfo(props){}
+- In the case of class components, props are handled in a different way:
+	class StudentInfo extends React.Component{
+	 constructor(props){
+	   super(props);
+	 }
+
+	 render(){
+	   return(
+		 <div className="main">
+		   <h2>{this.props.name}</h2>
+		   <h4>{this.props.rollNumber}</h4> 
+		 </div>
+	   )
+	 }
+	}
+
+-------------------------------
+
+What do you understand by Virtual DOM? Explain its working.
+	A virtual DOM is a lightweight JavaScript object which originally is just the copy of the real DOM. It is a node tree that lists the elements, their attributes and content as Objects and their properties. React's render function creates a node tree out of the React components. It then updates this tree in response to the mutations in the data model
+
+This Virtual DOM works in three simple steps.
+- Whenever any underlying data changes, the entire UI is re-rendered in Virtual DOM representation.
+- Then the difference between the previous DOM representation and the new one is calculated.
+- Once the calculations are done, the real DOM will be updated with only the things that have actually changed.
+
+-------------------------------
+
+What is the difference between state and props?
+	Both props and state are plain JavaScript objects. While both of them hold information that influences the output of render, they are different in their functionality with respect to component. Props get passed to the component similar to function parameters whereas state is managed within the component similar to variables declared within a function.
+
+-------------------------------
+
+What is the purpose of callback function as an argument of setState()?
+	The callback function is invoked when setState finished and the component gets rendered. Since setState() is asynchronous the callback function is used for any post action.
+
+Note: It is recommended to use lifecycle method rather than this callback function.
+
+-------------------------------
+
+What are the differences between controlled and uncontrolled components?
+- Controlled component In a controlled component, the value of the input element is controlled by React.
+	We store the state of the input element inside the code, and by using event-based callbacks, any changes made to the input element will be reflected in the code as well.
+- Uncontrolled component In an uncontrolled component, the value of the input element is handled by the DOM itself.
+	Input elements inside uncontrolled components work just like normal HTML input form elements.
+	The state of the input element is handled by the DOM. Whenever the value of the input element is changed,event-based callbacks are not called. To access the value of the input element, we can use ref.
+
+-------------------------------
+
+What is the difference between React and Angular?
+React																Angular
+React is a library and has only the View layer						Angular is a framework and has complete MVC functionality
+React handles rendering on the server side							AngularJS renders only on the client side but Angular 2 and above renders on the server side
+React uses JSX that looks like HTML in JS which can be confusing	Angular follows the template approach for HTML, which makes code shorter and easy to understand
+React Native is faster and more stable								Ionic, Angular's mobile native app is relatively less stable and slower
+In React, data flows only in one way and hence debugging is easy	In Angular, data flows both way i.e it has two-way data binding between children and parent and hence debugging is often difficult
+
+-------------------------------
+
+How to bind methods or event handlers in JSX callbacks?
+Binding in Constructor: In JavaScript classes, the methods are not bound by default. The same thing applies for React event handlers defined as class methods. Normally we bind them in constructor.
+	class Component extends React.Component {
+	  constructor(props) {
+		super(props)
+		this.handleClick = this.handleClick.bind(this)
+	  }
+
+	  handleClick() {
+		// ...
+	  }
+	}
+Arrow functions in callbacks: You can use arrow functions directly in the callbacks.
+	handleClick = () => {
+	  console.log('this is:', this)
+	}
+	<button onClick={this.handleClick}>
+	  {'Click me'}
+	</button>
+Arrow functions in callbacks: You can use arrow functions directly in the callbacks.
+	<button onClick={(event) => this.handleClick(event)}>
+	  {'Click me'}
+	</button>
+
+-------------------------------
+
+What are the different lifecycle methods in React?
+Mounting:
+There are four built-in lifecycle methods that are called in the following order when a component is mounted:
+constructor( ) - This is called before anything else. We can set the initial state of the component inside this method. The constructor method is used to set the initial state and bind methods to the component.
+getDerivedStateFromProps( ) - This is called before rendering the elements in the DOM.
+In this method, we can set the state of the component based on the props we received. This method is used very rarely.
+render( ) - This is the only required method in the class component. This method returns the HTML elements which are going to be rendered inside the DOM.
+componentDidMount( ) - It is called right after the component is rendered inside the DOM. All the statements which require the DOM nodes can be executed in this method. Network requests from a remote end-point can also be instantiated in this method.
+
+Updating:
+Updates in react are caused by changes in state or props. Update leads to re-rendering of the component. The following methods are called when a component is re-rendered:
+getDerivedStateFromProps( ) - This method is called again when a component is being re-rendered.
+shouldComponentUpdate( ) - This method is called before rendering the component when new props are received. It lets React know if the component's output is affected by the newly received props or by the state change. By default, it returns true.
+render( ) - To re-render the HTML inside the DOM, the render( ) method gets called again.
+getSnapshotBeforeUpdate( ) - This method is called just before the newly rendered HTML gets committed to the DOM. It stores the previous state of the component so that React has an idea of what parts of the DOM needs to be updated.
+componentDidUpdate( ) - It is called after the component gets re-rendered. This method works just like the componentDidMount( ) method, the difference is that this method does not get called on initial render.
+
+Unmounting:
+componentWillUnmount( ) - This method is called just before the component gets destroyed. Any clean up statements should be executed inside this method.
+
+-------------------------------
+
+Explain Strict Mode in React.
+StrictMode is a tool added in the version 16.3 of React to highlight potential problems in an application. It performs additional checks on the application.
+<React.StrictMode>
+
+StrictMode currently helps with the following issues:
+- Identifying components with unsafe lifecycle methods
+	Certain lifecycle methods are unsafe to use in asynchronous react applications. With the use of third-party libraries it becomes difficult to ensure that certain lifecycle methods are not used.
+
+- Warning about the usage of legacy string API
+	If one is using an older version of React, callback ref is the recommended way to manage refs instead of using the string refs.
+
+- Warning about the usage of findDOMNode
+	Previously, findDOMNode( ) method was used to search the tree of a DOM node. This method is deprecated in React. Hence, the StrictMode gives us a warning about the usage of this method.
+
+-------------------------------
+
+Explain React state and props.
+- React State (Owned by its component, Locally scoped, Witeable/Mutable, has setState() method to modify properties, Changes to state can be asynchronous, can only be passed as props)
+Every component in react has a built-in state object, which contains all the property values that belong to that component.
+In other words, the state object controls the behaviour of a component. Any change in the property values of the state object leads to re-rendering of the component.
+
+- React Props (Immutable, Has better performance, Can be passed to child components)
+Every react component, accepts a single object argument called props (which stands for “properties”).
+These props can be passed to a component using HTML attributes and the component accepts these props as an argument.
+Using props, we can pass data from one component to another.
+
+-------------------------------
+
+What is the difference between Shadow DOM and Virtual DOM?
+The Shadow DOM is a browser technology designed primarily for scoping variables and CSS in web components.
+Shadow DOM API is a key part in encapsulation — being able to keep the markup structure, style, and behavior hidden and separate from other code on the page so that different parts do not clash, and the code can be kept nice and clean.
+It provides a way to attach a hidden separated DOM to an element.
+The Virtual DOM is a concept implemented by libraries in JavaScript on top of browser APIs.
+
+-------------------------------
+
+What is React Router?
+React Router is a powerful routing library built on top of React, which helps in adding new screens and flows to the application. This keeps the URL in sync with data that’s being displayed on the web page. It maintains a standardized structure and behavior and is used for developing single page web applications.
+
+-------------------------------
+
+What are Higher-Order Components?
+A higher-order component (HOC) is a function that takes a component and returns a new component. Basically, it's a pattern that is derived from React's compositional nature.
+
+We call them pure components because they can accept any dynamically provided child component but they won't modify or copy any behavior from their input components.
+
+HOC can be used for many tasks like:
+Code reuse, logic and bootstrap abstraction
+Render High jacking
+State abstraction and manipulation
+Props manipulation
+
+limitations:
+- Don’t use HOCs inside the render method: It is not recommended to apply a HOC to a component within the render method of a component.
+- Static methods must be copied over: When you apply a HOC to a component the new component does not have any of the static methods of the original component. You can overcome this by copying the methods onto the container before returning it
+- Refs aren’t passed through: For HOCs you need to pass through all props to the wrapped component but this does not work for refs. This is because ref is not really a prop similar to key. In this case you need to use the React.forwardRef API
+
+-------------------------------
+
+What is the purpose of using super constructor with props argument?
+A child class constructor cannot make use of this reference until super() method has been called. The same applies for ES6 sub-classes as well. The main reason of passing props parameter to super() call is to access this.props in your child constructors.
+	class MyComponent extends React.Component {
+	  constructor(props) {
+		super(props)
+
+		console.log(this.props) // prints { name: 'John', age: 42 }
+	  }
+	}
+
+-------------------------------
+
+What is reconciliation?
+When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM. This process is called reconciliation.
+
+-------------------------------
+
+What are fragments?
+It's common pattern in React which is used for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+There is also a shorter syntax <>
+Benefits:
+Fragments are a bit faster and use less memory by not creating an extra DOM node. This only has a real benefit on very large and deep trees.
+Some CSS mechanisms like Flexbox and CSS Grid have a special parent-child relationships, and adding divs in the middle makes it hard to keep the desired layout.
+The DOM Inspector is less cluttered.
+
+-------------------------------
+
+What are portals in React?
+Portal is a recommended way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+ReactDOM.createPortal(child, container)
+The first argument is any render-able React child, such as an element, string, or fragment. The second argument is a DOM element.
+
+-------------------------------
+
+How do you memoize a component?
+React.memo. It provides a higher order component which memoizes component unless the props change. To use it, simply wrap the component using React.memo before you use it.
+
+-------------------------------
+
+Name a few techniques to optimize React app performance.
+There are many ways through which one can optimize the performance of a React app, let's have a look at some of them:
+
+Using useMemo( ) -
+It is a React hook that is used for caching CPU-Expensive functions.
+Sometimes in a React app, a CPU-Expensive function gets called repeatedly due to re-renders of a component, which can lead to slow rendering.
+useMemo( ) hook can be used to cache such functions. By using useMemo( ), the CPU-Expensive function gets called only when it is needed.
+
+Using React.PureComponent -
+It is a base component class that checks state and props of a component to know whether the component should be updated.
+Instead of using the simple React.Component, we can use React.PureComponent to reduce the re-renders of a component unnecessarily.
+
+Maintaining State Colocation -
+This is a process of moving the state as close to where you need it as possible.
+Sometimes in React app, we have a lot of unnecessary states inside the parent component which makes the code less readable and harder to maintain. Not to forget, having many states inside a single component leads to unnecessary re-renders for the component.
+It is better to shift states which are less valuable to the parent component, to a separate component.
+
+Lazy Loading -
+It is a technique used to reduce the load time of a React app. Lazy loading helps reduce the risk of web app performances to minimal.
+
+-------------------------------
+
+React Hooks
+Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+With Hooks, you can extract stateful logic from a component so it can be tested independently and reused. Hooks allow you to reuse stateful logic without changing your component hierarchy. This makes it easy to share Hooks among many components or with the community.
+
+State Hook (constructor)
+- const [count, setCount] = useState(0);
+useState enables you to add state to function components. Calling React.useState inside a function component generates a single piece of state associated with that component.
+The useState Hook allows you to declare only one state variable (of any type) at a time. The only argument to the useState() Hook is the initial state.
+useState returns a pair of values: the current state and a function that updates it. Like: const [count, setCount] = useState(0).
+
+Effect Hook (componentDidMount, componentDidUpdate, and componentWillUnmount combined.)
+useEffect() lets you perform side effects in function components:
+useEffect() hook accepts 2 arguments:
+useEffect(callback[, dependencies]);
+callback is the callback function containing side-effect logic. useEffect() executes the callback function after React has committed the changes to the screen.
+dependencies is an optional array of dependencies. useEffect() executes callback only if the dependencies have changed between renderings.
+
+Rules of Hooks
+Don't call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the top level of your React function, before any early returns.
+Don't call Hooks from regular JavaScript functions. Instead, you can:
+Call Hooks from React function components.
+Call Hooks from custom Hook
+
+A custom Hook is a JavaScript function whose name starts with ”use” and that may call other Hooks.
+
+useContext
+const value = useContext(MyContext);
+Accepts a context object (the value returned from React.createContext) and returns the current context value for that context.
+
+useReducer
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+An alternative to useState. Accepts a reducer of type (state, action) => newState, and returns the current state paired with a dispatch method.
+
+useCallback - Returns a memoized callback.
+const memoizedCallback = useCallback(
+  () => {
+    doSomething(a, b);
+  },
+  [a, b],
+);
+
+useMemo - Returns a memoized value.
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+the function passed to useMemo runs during rendering. Don't do anything there that you wouldn't normally do while rendering.
+
+useRef
+const refContainer = useRef(initialValue);
+useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
+
+useImperativeHandle - customizes the instance value that is exposed to parent components when using ref.
+useImperativeHandle(ref, createHandle, [deps])
+should be used with forwardRef
+
+useLayoutEffect
+The signature is identical to useEffect, but it fires synchronously after all DOM mutations. Use this to read layout from the DOM and synchronously re-render.
+
+useDebugValue - can be used to display a label for custom hooks in React DevTools.
+useDebugValue(value)
+
+-------------------------------
+
+What is flux?
+Flux is an application design paradigm used as a replacement for the more traditional MVC pattern. It is not a framework or a library but a new kind of architecture that complements React and the concept of Unidirectional Data Flow. Facebook uses this pattern internally when working with React.
+workflow: Action - Dispatcher - Store - View
+
+Actions - Helper methods that facilitate passing data to the Dispatcher
+Dispatcher - Receives actions and broadcasts payloads to registered callbacks
+Stores - Containers for application state & logic that have callbacks registered to the dispatcher
+Controller Views - React Components that grab the state from Stores and pass it down via props to child components.
+
+-------------------------------
+
+What is Redux?
+Redux is a predictable state container for JavaScript apps based on the Flux design pattern. Redux can be used together with React, or with any other view library. It is tiny (about 2kB) and has no dependencies.
+
+Principles
+Single source of truth: The state of the entire application is stored in an object/ state tree within a single store. The single state tree makes it easier to keep track of changes over time and debug or inspect the application.
+State is read-only: The only way to change the state is to trigger an action. An action is a plain JS object describing the change. Just like state is the minimal representation of data, the action is the minimal representation of the change to that data. 
+Changes are made with pure functions: In order to specify how the state tree is transformed by actions, you need pure functions. Pure functions are those whose return value depends solely on the values of their arguments.
+
+Advantages:
+Predictability of outcome – Since there is always one source of truth, i.e. the store, there is no confusion about how to sync the current state with actions and other parts of the application.
+Maintainability – The code becomes easier to maintain with a predictable outcome and strict structure.
+Server-side rendering – You just need to pass the store created on the server, to the client side. This is very useful for initial render and provides a better user experience as it optimizes the application performance.
+Developer tools – From actions to state changes, developers can track everything going on in the application in real time.
+Community and ecosystem – Redux has a huge community behind it which makes it even more captivating to use. A large community of talented individuals contribute to the betterment of the library and develop various applications with it.
+Ease of testing – Redux’s code is mostly functions which are small, pure and isolated. This makes the code testable and independent.
+Organization – Redux is precise about how code should be organized, this makes the code more consistent and easier when a team works with it.
+
+-------------------------------
+
+How is Redux different from Flux?
+Flux											Redux
+1. The Store contains state and change logic	1. Store and change logic are separate
+2. There are multiple stores					2. There is only one store
+3. All the stores are disconnected and flat		3. Single store with hierarchical reducers
+4. Has singleton dispatcher						4. No concept of dispatcher
+5. React components subscribe to the store		5. Container components utilize connect
+6. State is mutable								6. State is immutable
+
+-------------------------------
+
+Reverse Ajax:
+is essentially a concept: being able to send data from the server to the client. In a standard HTTP Ajax request, data is sent from client to the server.
+Other simmilar terms are HTTP Polling, Long Polling, Comet, Server Push, Web Sockets in HTML5.
+Comet is a web application model where a request is sent to the server and kept alive for a long time, until a time-out or a server event occurs. When the request is completed, another long-lived Ajax request is sent to wait for other server events. With Comet, web servers can send the data to the client without having to explicitly request it.
+
+-------------------------------
+
+Typescript
+TypeScript is a statically-typed superset of JavaScript.
+Writing types can be optional in TypeScript, because type inference allows you to get a lot of power without writing additional code.
+TypeScript code is transformed into JavaScript code via the TypeScript compiler or Babel. This JavaScript is clean, simple code which runs anywhere JavaScript runs: In a browser, on Node.JS or in your apps.
+
+Static Type-Checking: TypeScript uses static typing and helps type checking at compile time. Thus, you can find errors while writing the code without running the script.
+Strict Null Checking: Errors, like cannot read property ‘x’ of undefined, is common in JavaScript programming. You can avoid most of these kinds of errors since one cannot use a variable that is not known to the TypeScript compiler.
+Object-Oriented Language: TypeScript provides features like Classes, Interfaces, and Modules. Thus, it can write object-oriented code for client-side as well as server-side development.
+DOM Manipulation: You can use TypeScript to manipulate the DOM for adding or removing elements.
+
+List out the built-in data types in TypeScript.
+In TypeScript, the built-in data types are also known as primitive data types and the list include:
+Number: This represents number type values. The numbers are stored as floating-point values in TypeScript.
+String: A string represents a sequence of characters stored as Unicode UTF-16 code.
+Boolean: This represents a logical value. When we use the Boolean type, we get the output only in true or false.
+Null: Null represents a variable whose value is undefined. It is not possible to directly reference the null type value itself.
+Undefined: The Undefined type denotes all uninitialized variables.
+Void: A void is the return type of the functions that do not return any type of value.
+
+https://www.edureka.co/blog/interview-questions/typescript-interview-questions/
